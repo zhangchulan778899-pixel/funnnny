@@ -40,19 +40,34 @@ function App() {
         </video>
         <div className="hero-shade" />
         <header className="nav shell">
-          <a className="brand" href="#home" aria-label="返回首页"><span>FQW</span><small>ARCHITECTURE</small></a>
+          <a className="brand" href="#home" aria-label="FUNNNNNY STUDIO 返回首页">
+            <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
+            <span className="brand-name">FUNNNNNY <b>STUDIO</b></span>
+          </a>
           <nav aria-label="主导航">
-            <a href="#about">关于</a><a href="#works">项目</a><a href="#strengths">能力</a>
+            <a href="#works"><strong>作品</strong><small>WORKS</small></a>
+            <a href="#about"><strong>经历</strong><small>PROFILE</small></a>
+            <a href="#strengths"><strong>能力</strong><small>EXPERTISE</small></a>
+            <a href="#contact"><strong>联系</strong><small>CONTACT</small></a>
           </nav>
-          <a className="nav-contact" href="#contact">联系我 <ArrowUpRight size={16} /></a>
+          <a className="nav-contact" href="#about"><span className="person-dot" />个人介绍 <small>ABOUT</small></a>
         </header>
         <div className="hero-content shell">
-          <p className="eyebrow">ARCHITECTURE · SPACE · SUSTAINABILITY</p>
-          <h1>以空间回应<br /><em>场地与时间</em></h1>
-          <div className="hero-bottom">
-            <p>范钦威<br /><span>建筑设计师 / 中国 · 湖南</span></p>
-            <a href="#about" className="scroll-down" aria-label="向下了解更多"><ArrowDown size={20} /></a>
+          <div className="hero-center">
+            <p className="eyebrow">FUNNNNNY STUDIO · ARCHITECTURE</p>
+            <h1>以空间回应</h1>
+            <p className="hero-slogan">场地与时间</p>
+            <p className="hero-slogan-en">SPACE · SITE · TIME</p>
+            <div className="hero-identity">
+              <strong>建筑设计师 · 范钦威</strong>
+              <span>ARCHITECT / QINWEI FAN</span>
+              <small>湖南工程学院 · 建筑学</small>
+            </div>
           </div>
+          <a href="#about" className="scroll-down" aria-label="向下了解更多">
+            <span>向下滚动<small>SCROLL DOWN</small></span>
+            <ArrowDown size={18} />
+          </a>
         </div>
       </section>
 
