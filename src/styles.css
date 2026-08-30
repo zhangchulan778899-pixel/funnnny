@@ -132,3 +132,14 @@
 .project-identity h3{font-weight:700}
 .project-rail time{margin-top:0}
 @media(max-width:760px){.project-identity{grid-column:1;grid-row:1 / span 2;align-items:flex-start;margin:0}.project-identity>strong{margin-bottom:8px;font-size:15px}.project-identity .project-logo{object-position:left center}.project-identity h3{text-align:left}.project-rail time{grid-column:2;grid-row:1}}
+
+/* Floating frosted navigation after the hero */
+.hero{padding-top:80px}
+.nav{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:30;color:#fff;transition:top .38s ease,height .38s ease,padding .38s ease,background-color .38s ease,border-color .38s ease,border-radius .38s ease,box-shadow .38s ease,color .28s ease}
+.hero-content{height:100%}
+.nav.is-scrolled{top:14px;height:70px;padding-inline:24px;color:#171813;background:rgba(240,240,233,.72);border:1px solid rgba(23,24,19,.14);border-radius:16px;box-shadow:0 14px 42px rgba(22,24,19,.12);-webkit-backdrop-filter:blur(20px) saturate(145%);backdrop-filter:blur(20px) saturate(145%)}
+.nav.is-scrolled .brand img.brand-mark{filter:none;opacity:.9}
+.nav.is-scrolled .nav-contact,.nav.is-scrolled nav a{opacity:.86}
+.nav.is-scrolled .nav-contact:hover,.nav.is-scrolled nav a:hover{opacity:1}
+#about,#works,#collaboration,#contact{scroll-margin-top:100px}
+@media(max-width:680px){.hero{padding-top:72px}.hero-content{height:100%}.nav.is-scrolled{top:10px;height:62px;padding-inline:16px;border-radius:13px}}

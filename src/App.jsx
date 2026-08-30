@@ -144,12 +144,25 @@ function ContactSection() {
 }
 
 function App() {
+  const [navScrolled, setNavScrolled] = useState(false)
+
+  useEffect(() => {
+    const updateNav = () => setNavScrolled(window.scrollY >= window.innerHeight - 96)
+    updateNav()
+    window.addEventListener('scroll', updateNav, { passive: true })
+    window.addEventListener('resize', updateNav)
+    return () => {
+      window.removeEventListener('scroll', updateNav)
+      window.removeEventListener('resize', updateNav)
+    }
+  }, [])
+
   return (
     <main>
       <section className="hero" id="home">
         <img className="hero-video" src="/hero-v2.png" alt="黑白建筑柱廊与光影构成" />
         <div className="hero-shade" />
-        <header className="nav shell">
+        <header className={`nav shell ${navScrolled ? 'is-scrolled' : ''}`}>
           <a className="brand" href="#home" aria-label="FUNNNNNY STUDIO 返回首页">
             <img className="brand-mark" src="/studio-mark.png" alt="" aria-hidden="true" />
             <span className="brand-name">FUNNNNNY <b>STUDIO</b></span>
