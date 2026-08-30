@@ -28,3 +28,7 @@
 @media(max-width:800px){.project-list{grid-template-columns:1fr;gap:72px}.project,.project:nth-child(3n+1){grid-column:1}.project-image,.project:nth-child(3n+1) .project-image{aspect-ratio:4/3}}
 
 .project:nth-child(4){grid-column:auto}.project:nth-child(4) .project-image{aspect-ratio:4/3}
+
+/* Unified one-project-per-row presentation */
+.project-list{grid-template-columns:1fr;gap:108px}.project,.project:nth-child(3n+1),.project:nth-child(4){grid-column:1}.project-image,.project:nth-child(3n+1) .project-image,.project:nth-child(4) .project-image{aspect-ratio:16/8}
+@media(max-width:800px){.project-list{gap:72px}.project-image,.project:nth-child(3n+1) .project-image,.project:nth-child(4) .project-image{aspect-ratio:4/3}}
