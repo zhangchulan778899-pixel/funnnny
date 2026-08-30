@@ -57,3 +57,11 @@
 .project-copy p{margin:5px 0 0;font-size:10px;line-height:1.6;letter-spacing:.2px;color:#888a80;text-align:right;white-space:nowrap}
 @media(max-width:1000px){.project-copy{display:block}.project-copy h3{font-size:clamp(15px,1.8vw,20px)}.project-copy p{margin-top:8px;text-align:left}}
 @media(max-width:760px){.project,.project:nth-child(3n+1),.project:nth-child(4){grid-template-columns:1fr;grid-template-areas:'main' 'rail';gap:18px}.project-rail{display:grid;grid-template-columns:42px 1fr;align-items:center;border-top:0}.project-rail span{width:42px;height:42px;border:1px solid rgba(237,237,230,.35)}.project-rail time{justify-self:end;margin:0;padding:0;border:0}.project-copy h3{font-size:clamp(13px,3.9vw,18px);letter-spacing:-.2px}.project-copy p{font-size:9px;white-space:normal}}
+
+/* Light selected-works canvas */
+.works{background:#fff;color:#171813}
+.works-heading p,.project-copy p{color:#74766d}
+.project-rail{border-top-color:rgba(23,24,19,.34)}
+.project-rail span{border-color:rgba(23,24,19,.34);border-top:0;color:#171813}
+.project-rail time{border-top-color:rgba(23,24,19,.14);color:#67695f}
+@media(max-width:760px){.project-rail span{border-color:rgba(23,24,19,.3)}}
