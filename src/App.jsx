@@ -22,6 +22,27 @@ const projects = [
     year: '2024',
     image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=88',
   },
+  {
+    index: '04',
+    title: '古建测绘 · 关圣殿',
+    subtitle: '传统建筑测绘 / 在地建造研究',
+    year: '2024',
+    image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1800&q=88',
+  },
+  {
+    index: '05',
+    title: '云水栖居 · 低碳生活单元',
+    subtitle: '节能减排社会实践 / 绿色居住原型',
+    year: '2023',
+    image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1800&q=88',
+  },
+  {
+    index: '06',
+    title: '城市缝合 · 公共空间再生',
+    subtitle: '城市更新 / 公共空间与社区营造',
+    year: '2024',
+    image: 'https://images.unsplash.com/photo-1524230572899-a752b3835840?auto=format&fit=crop&w=1800&q=88',
+  },
 ]
 
 const strengths = [
@@ -35,9 +56,7 @@ function App() {
   return (
     <main>
       <section className="hero" id="home">
-        <video className="hero-video" autoPlay muted loop playsInline poster="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=2000&q=88">
-          <source src="https://videos.pexels.com/video-files/3764259/3764259-hd_1920_1080_25fps.mp4" type="video/mp4" />
-        </video>
+        <img className="hero-video" src="/hero-v2.png" alt="黑白建筑柱廊与光影构成" />
         <div className="hero-shade" />
         <header className="nav shell">
           <a className="brand" href="#home" aria-label="FUNNNNNY STUDIO 返回首页">
