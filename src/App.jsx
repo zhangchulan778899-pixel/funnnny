@@ -109,8 +109,11 @@ function App() {
         <div className="project-list shell">
           {projects.map((project) => (
             <article className="project" key={project.index}>
-              <div className="project-image"><img src={project.image} alt={project.title} /></div>
-              <div className="project-meta"><span>{project.index}</span><div><h3>{project.title}</h3><p>{project.subtitle}</p></div><time>{project.year}</time></div>
+              <div className="project-rail"><span>{project.index}</span><time>{project.year}</time></div>
+              <div className="project-main">
+                <div className="project-image"><img src={project.image} alt={project.title} /></div>
+                <div className="project-copy"><h3>{project.title}</h3><p>{project.subtitle}</p></div>
+              </div>
             </article>
           ))}
         </div>

@@ -32,3 +32,28 @@
 /* Unified one-project-per-row presentation */
 .project-list{grid-template-columns:1fr;gap:108px}.project,.project:nth-child(3n+1),.project:nth-child(4){grid-column:1}.project-image,.project:nth-child(3n+1) .project-image,.project:nth-child(4) .project-image{aspect-ratio:16/8}
 @media(max-width:800px){.project-list{gap:72px}.project-image,.project:nth-child(3n+1) .project-image,.project:nth-child(4) .project-image{aspect-ratio:4/3}}
+
+/* Editorial project rows: compact information rail + cinematic image */
+.project-list{display:flex;flex-direction:column;gap:136px}
+.project,.project:nth-child(3n+1),.project:nth-child(4){display:grid;grid-template-columns:minmax(220px,23%) minmax(0,1fr);grid-template-areas:'meta image';gap:48px;align-items:stretch}
+.project-image,.project:nth-child(3n+1) .project-image,.project:nth-child(4) .project-image{grid-area:image;aspect-ratio:16/9;min-width:0}
+.project-meta{grid-area:meta;display:flex;flex-direction:column;min-width:0;padding:0;border-top:1px solid rgba(237,237,230,.42)}
+.project-meta>span{width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(237,237,230,.42);border-top:0;font-size:10px;letter-spacing:1.5px;color:#ededE6}
+.project-meta>div{margin-top:clamp(64px,8vw,138px)}
+.project-meta h3{max-width:360px;margin:0 0 15px;font-family:'Noto Serif SC',serif;font-size:clamp(22px,1.65vw,30px);font-weight:400;line-height:1.42;letter-spacing:-.4px}
+.project-meta p{max-width:330px;font-size:11px;line-height:1.75;letter-spacing:.25px;color:#888a80}
+.project-meta time{margin-top:auto;padding-top:18px;border-top:1px solid rgba(237,237,230,.16);font-size:11px;letter-spacing:1.5px;color:#a6a89e}
+@media(max-width:1000px){.project,.project:nth-child(3n+1),.project:nth-child(4){grid-template-columns:minmax(190px,28%) minmax(0,1fr);gap:30px}.project-meta>div{margin-top:54px}}
+@media(max-width:760px){.project-list{gap:76px}.project,.project:nth-child(3n+1),.project:nth-child(4){grid-template-columns:1fr;grid-template-areas:'image' 'meta';gap:22px}.project-image,.project:nth-child(3n+1) .project-image,.project:nth-child(4) .project-image{aspect-ratio:4/3}.project-meta{display:grid;grid-template-columns:48px 1fr auto;gap:16px;align-items:start;border-top:0}.project-meta>span{width:42px;height:42px;border:1px solid rgba(237,237,230,.35)}.project-meta>div{margin-top:0}.project-meta h3{font-size:21px;margin-bottom:9px}.project-meta time{margin:0;padding:3px 0 0;border:0}.project-meta p{font-size:10px}}
+
+/* Titles share the image edge and remain on one line */
+.project,.project:nth-child(3n+1),.project:nth-child(4){grid-template-areas:'rail main'}
+.project-rail{grid-area:rail;display:flex;flex-direction:column;min-width:0;border-top:1px solid rgba(237,237,230,.42)}
+.project-rail span{width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(237,237,230,.42);border-top:0;font-size:10px;letter-spacing:1.5px;color:#ededE6}
+.project-rail time{margin-top:auto;padding-top:18px;border-top:1px solid rgba(237,237,230,.16);font-size:11px;letter-spacing:1.5px;color:#a6a89e}
+.project-main{grid-area:main;min-width:0}
+.project-copy{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:start;padding-top:22px}
+.project-copy h3{min-width:0;margin:0;font-family:'Noto Serif SC',serif;font-size:clamp(17px,1.35vw,24px);font-weight:400;line-height:1.35;letter-spacing:-.35px;white-space:nowrap}
+.project-copy p{margin:5px 0 0;font-size:10px;line-height:1.6;letter-spacing:.2px;color:#888a80;text-align:right;white-space:nowrap}
+@media(max-width:1000px){.project-copy{display:block}.project-copy h3{font-size:clamp(15px,1.8vw,20px)}.project-copy p{margin-top:8px;text-align:left}}
+@media(max-width:760px){.project,.project:nth-child(3n+1),.project:nth-child(4){grid-template-columns:1fr;grid-template-areas:'main' 'rail';gap:18px}.project-rail{display:grid;grid-template-columns:42px 1fr;align-items:center;border-top:0}.project-rail span{width:42px;height:42px;border:1px solid rgba(237,237,230,.35)}.project-rail time{justify-self:end;margin:0;padding:0;border:0}.project-copy h3{font-size:clamp(13px,3.9vw,18px);letter-spacing:-.2px}.project-copy p{font-size:9px;white-space:normal}}
