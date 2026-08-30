@@ -1,4 +1,5 @@
-import { ArrowDown, ArrowUpRight, Mail, Phone, MapPin, MoveRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowDown, Mail, Phone, MapPin, MoveRight } from 'lucide-react'
 
 const projects = [
   {
@@ -49,6 +50,98 @@ const collaborations = [
   ['03', '快题设计', 'RAPID DESIGN', '针对升学、竞赛与方案汇报需求，提供限时构思、图面组织、表达优化及针对性设计辅导。'],
   ['04', '作品分享', 'PORTFOLIO SHARING', '持续整理设计过程、图纸表达与作品集经验，也欢迎围绕建筑学习与创作展开内容合作。'],
 ]
+
+const contactMessage = '很高兴你来到这里。告诉我你的场地、想法与时间，我们从一封邮件开始。'
+
+function useTypewriter(text, speed = 38, startDelay = 600) {
+  const [displayed, setDisplayed] = useState('')
+
+  useEffect(() => {
+    setDisplayed('')
+    let index = 0
+    let interval
+    const delay = window.setTimeout(() => {
+      interval = window.setInterval(() => {
+        index += 1
+        setDisplayed(text.slice(0, index))
+        if (index >= text.length) window.clearInterval(interval)
+      }, speed)
+    }, startDelay)
+    return () => {
+      window.clearTimeout(delay)
+      window.clearInterval(interval)
+    }
+  }, [text, speed, startDelay])
+
+  return { displayed, done: displayed.length >= text.length }
+}
+
+function ContactSection() {
+  const videoRef = useRef(null)
+  const prevXRef = useRef(null)
+  const targetTimeRef = useRef(0)
+  const seekingRef = useRef(false)
+  const [actionsVisible, setActionsVisible] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const { displayed, done } = useTypewriter(contactMessage)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setActionsVisible(true), 400)
+    return () => window.clearTimeout(timer)
+  }, [])
+
+  const seekToTarget = () => {
+    const video = videoRef.current
+    if (!video || !Number.isFinite(video.duration) || seekingRef.current) return
+    if (Math.abs(video.currentTime - targetTimeRef.current) < 0.01) return
+    seekingRef.current = true
+    video.currentTime = targetTimeRef.current
+  }
+
+  const handleMouseMove = (event) => {
+    const video = videoRef.current
+    if (!video || !Number.isFinite(video.duration)) return
+    if (prevXRef.current === null) {
+      prevXRef.current = event.clientX
+      return
+    }
+    const delta = event.clientX - prevXRef.current
+    prevXRef.current = event.clientX
+    const nextTime = targetTimeRef.current + (delta / window.innerWidth) * 0.8 * video.duration
+    targetTimeRef.current = Math.min(video.duration, Math.max(0, nextTime))
+    seekToTarget()
+  }
+
+  const handleSeeked = () => {
+    seekingRef.current = false
+    seekToTarget()
+  }
+
+  const copyEmail = async () => {
+    await navigator.clipboard.writeText('2093507279@qq.com')
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 1600)
+  }
+
+  return (
+    <footer className="contact" id="contact" onMouseMove={handleMouseMove} onMouseLeave={() => { prevXRef.current = null }}>
+      <video ref={videoRef} className="contact-video" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260530_042513_df96a13b-6155-4f6e-8b93-c9dee66fba08.mp4" muted playsInline preload="auto" onLoadedMetadata={() => { targetTimeRef.current = 0 }} onSeeked={handleSeeked} />
+      <div className="contact-wash" />
+      <div className="contact-top shell"><span>FUNNNNNY STUDIO</span><span>OPEN FOR COLLABORATION · 2026</span></div>
+      <div className="contact-stage shell">
+        <div className="contact-dialogue">
+          <p className="contact-intro">你好，这里是 FUNNNNNY STUDIO<br />建筑与空间设计合作</p>
+          <p className="contact-typewriter">{displayed}{!done && <span className="typing-cursor" />}</p>
+          <div className={`contact-actions ${actionsVisible ? 'is-visible' : ''}`}>
+            {['建筑设计', '小设计', '快题设计', '作品分享'].map((label) => <a key={label} href="#collaboration">{label}</a>)}
+            <button type="button" className="contact-email" onClick={copyEmail}><span>{copied ? '邮箱已复制' : '联系我：'}<u>2093507279@qq.com</u></span><i aria-hidden="true" /></button>
+          </div>
+        </div>
+      </div>
+      <div className="contact-bottom shell"><span>范钦威 · 建筑设计作品集</span><span>横向移动鼠标，探索画面</span><a href="#home">BACK TO TOP ↑</a></div>
+    </footer>
+  )
+}
 
 function App() {
   return (
@@ -131,14 +224,7 @@ function App() {
         </div>
       </section>
 
-      <footer className="contact" id="contact">
-        <div className="shell contact-inner">
-          <p className="eyebrow">OPEN FOR COLLABORATION · 2026</p>
-          <h2>让我们一起，<br /><em>构想下一处空间。</em></h2>
-          <a className="mail-link" href="mailto:2093507279@qq.com">写封邮件给我 <ArrowUpRight size={26} /></a>
-          <div className="footer-line"><span>范钦威 · 建筑设计作品集</span><span>© 2026 ALL RIGHTS RESERVED</span><a href="#home">BACK TO TOP ↑</a></div>
-        </div>
-      </footer>
+      <ContactSection />
     </main>
   )
 }
