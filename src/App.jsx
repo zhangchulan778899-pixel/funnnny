@@ -3,24 +3,24 @@ import { ArrowDown, ArrowUpRight, Mail, Phone, MapPin, MoveRight } from 'lucide-
 const projects = [
   {
     index: '01',
-    title: '山水之间 · 绿色公共建筑',
-    subtitle: '全国高等院校绿色建筑技能大赛 · 一等奖',
+    title: '非遗遗产保护—旧巷新生·隆回滩头传统民居改造',
+    subtitle: '非遗保护 / 传统民居活化更新',
     year: '2025',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1800&q=88',
+    image: '/project-01.png',
   },
   {
     index: '02',
-    title: '共生院落 · 可持续社区',
-    subtitle: '湖南省大学生可持续建筑竞赛 · 一等奖',
+    title: '工业遗产更新—第二地面上·挂咀州老船厂改造',
+    subtitle: '工业遗产更新 / 老船厂空间再生',
     year: '2025',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=88',
+    image: '/project-02.png',
   },
   {
     index: '03',
-    title: '校园更新 · 南校区改造',
-    subtitle: '概念方案设计 / 公共空间更新',
+    title: '城市设计—延景·融生·青少年活动中心设计',
+    subtitle: '城市设计 / 青少年公共活动空间',
     year: '2024',
-    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=88',
+    image: '/project-03.png',
   },
   {
     index: '04',
@@ -116,7 +116,7 @@ function App() {
         <div className="project-list shell">
           {projects.map((project) => (
             <article className="project" key={project.index}>
-              <div className="project-image"><img src={project.image} alt={project.title} /><span className="project-arrow"><ArrowUpRight size={28} /></span></div>
+              <div className="project-image"><img src={project.image} alt={project.title} /></div>
               <div className="project-meta"><span>{project.index}</span><div><h3>{project.title}</h3><p>{project.subtitle}</p></div><time>{project.year}</time></div>
             </article>
           ))}
