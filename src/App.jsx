@@ -7,6 +7,7 @@ const projects = [
     subtitle: '第七届全国绿建一等奖',
     year: '2025',
     image: '/project-01.png',
+    logo: '/project-logo-01.png',
   },
   {
     index: '02',
@@ -14,6 +15,7 @@ const projects = [
     subtitle: '湖南省可持续一等奖',
     year: '2025',
     image: '/project-02.png',
+    logo: '/project-logo-02.png',
   },
   {
     index: '03',
@@ -21,6 +23,7 @@ const projects = [
     subtitle: '城市设计 / 青少年公共活动空间',
     year: '2024',
     image: '/project-03.png',
+    logo: '/project-logo-03.png',
   },
   {
     index: '04',
@@ -28,6 +31,7 @@ const projects = [
     subtitle: '毕业设计 / 工业遗产保护 / 适应性改造',
     year: '2026',
     image: '/project-04.jpg',
+    logo: '/project-logo-04.png',
   },
   {
     index: '05',
@@ -35,14 +39,15 @@ const projects = [
     subtitle: '湖南省可持续二等奖 / 概念设计 / 村落研究',
     year: '2023',
     image: '/project-05.jpg',
+    logo: '/project-logo-05.png',
   },
 ]
 
-const strengths = [
-  ['01', '建筑设计', '从场地解读、概念生成到空间落地，构建清晰且富有张力的设计叙事。'],
-  ['02', '可持续策略', '以气候、材料与能耗为线索，将绿色策略融入建筑形式与日常体验。'],
-  ['03', '数字化表达', '熟练运用 Rhino、D5、AutoCAD、SketchUp 与 Photoshop 完成设计表达。'],
-  ['04', '调研与协作', '具备古建筑测绘、艺术写生与团队竞赛经验，快速适应复杂项目语境。'],
+const collaborations = [
+  ['01', '建筑设计', 'ARCHITECTURAL DESIGN', '面向住宅、公共建筑与更新项目，提供概念构思、空间推演、方案深化及建筑表现等完整设计服务。'],
+  ['02', '小设计', 'SMALL-SCALE DESIGN', '承接空间装置、展陈节点、景观小品与局部改造，以轻量尺度回应具体场景与真实使用需求。'],
+  ['03', '快题设计', 'RAPID DESIGN', '针对升学、竞赛与方案汇报需求，提供限时构思、图面组织、表达优化及针对性设计辅导。'],
+  ['04', '作品分享', 'PORTFOLIO SHARING', '持续整理设计过程、图纸表达与作品集经验，也欢迎围绕建筑学习与创作展开内容合作。'],
 ]
 
 function App() {
@@ -59,7 +64,7 @@ function App() {
           <nav aria-label="主导航">
             <a href="#works"><strong>作品</strong><small>WORKS</small></a>
             <a href="#about"><strong>经历</strong><small>PROFILE</small></a>
-            <a href="#strengths"><strong>能力</strong><small>EXPERTISE</small></a>
+            <a href="#collaboration"><strong>合作</strong><small>COLLABORATION</small></a>
             <a href="#contact"><strong>联系</strong><small>CONTACT</small></a>
           </nav>
           <a className="nav-contact" href="#about"><span className="person-dot" />个人介绍 <small>ABOUT</small></a>
@@ -109,7 +114,7 @@ function App() {
         <div className="project-list shell">
           {projects.map((project) => (
             <article className="project" key={project.index}>
-              <div className="project-rail"><span>{project.index}</span><time>{project.year}</time></div>
+              <div className="project-rail"><img className="project-logo" src={project.logo} alt={`${project.title}项目图标`} /><time>{project.year}</time></div>
               <div className="project-main">
                 <div className="project-image"><img src={project.image} alt={project.title} /></div>
                 <div className="project-copy"><h3>{project.title}</h3><p>{project.subtitle}</p></div>
@@ -119,10 +124,10 @@ function App() {
         </div>
       </section>
 
-      <section className="strengths section shell" id="strengths">
-        <div className="section-heading"><span>03 / CAPABILITIES</span><h2>以复合能力，<br />推动设计落地。</h2></div>
+      <section className="strengths collaboration section shell" id="collaboration">
+        <div className="section-heading collaboration-heading"><span>03 / COLLABORATION</span><div><h2>合作展示</h2><p>从建筑到表达，承接多尺度设计委托。</p></div></div>
         <div className="strength-grid">
-          {strengths.map(([num, title, text]) => <article key={num}><span>{num}</span><h3>{title}</h3><p>{text}</p><MoveRight size={22} /></article>)}
+          {collaborations.map(([num, title, english, text]) => <article key={num}><span>{num} / {english}</span><h3>{title}</h3><p>{text}</p><a href="mailto:2093507279@qq.com" aria-label={`咨询${title}`}>合作咨询 <MoveRight size={18} /></a></article>)}
         </div>
       </section>
 

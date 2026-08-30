@@ -65,3 +65,24 @@
 .project-rail span{border-color:rgba(23,24,19,.34);border-top:0;color:#171813}
 .project-rail time{border-top-color:rgba(23,24,19,.14);color:#67695f}
 @media(max-width:760px){.project-rail span{border-color:rgba(23,24,19,.3)}}
+
+/* Project identity drawings */
+.project-logo{width:100%;height:118px;padding:22px 8px 22px 0;object-fit:contain;object-position:left center;mix-blend-mode:multiply;filter:grayscale(1) contrast(1.08)}
+@media(max-width:760px){.project-rail{grid-template-columns:minmax(0,1fr) auto}.project-logo{width:min(58vw,220px);height:74px;padding:12px 0}.project-rail time{align-self:center}}
+
+/* Commercial collaboration showcase */
+.collaboration-heading>div{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.collaboration-heading h2{white-space:nowrap}
+.collaboration-heading p{max-width:430px;margin:0 0 8px;font-size:13px;line-height:1.8;color:#74766d;text-align:right}
+.collaboration .strength-grid{border-top-color:var(--ink)}
+.collaboration .strength-grid article{min-height:340px;transition:background-color .3s ease,color .3s ease}
+.collaboration .strength-grid article:hover{background:#171813;color:#f0f0e9}
+.collaboration .strength-grid article>span{font-size:10px;letter-spacing:1.2px}
+.collaboration .strength-grid h3{margin:64px 0 18px;font-family:'Noto Serif SC',serif;font-size:34px}
+.collaboration .strength-grid p{max-width:440px;line-height:1.9}
+.collaboration .strength-grid article>a{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:22px;border-top:1px solid var(--line);font-size:11px;letter-spacing:1.2px}
+.collaboration .strength-grid article>a svg{margin-top:0}
+.collaboration .strength-grid article:hover>span,.collaboration .strength-grid article:hover p{color:#b8baaf}
+.collaboration .strength-grid article:hover>a{border-top-color:rgba(240,240,233,.2)}
+@media(max-width:1000px){.collaboration-heading>div{display:block}.collaboration-heading p{margin-top:16px;text-align:left}.collaboration .strength-grid{margin-left:0}}
+@media(max-width:680px){.collaboration .strength-grid article{min-height:300px}.collaboration .strength-grid h3{margin-top:48px;font-size:29px}}
