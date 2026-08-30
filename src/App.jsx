@@ -41,7 +41,7 @@ function App() {
         <div className="hero-shade" />
         <header className="nav shell">
           <a className="brand" href="#home" aria-label="FUNNNNNY STUDIO 返回首页">
-            <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
+            <img className="brand-mark" src="/studio-mark.png" alt="" aria-hidden="true" />
             <span className="brand-name">FUNNNNNY <b>STUDIO</b></span>
           </a>
           <nav aria-label="主导航">
@@ -61,7 +61,7 @@ function App() {
             <div className="hero-identity">
               <strong>建筑设计师 · 范钦威</strong>
               <span>ARCHITECT / QINWEI FAN</span>
-              <small>湖南工程学院 · 建筑学</small>
+              <small>西安建筑科技大学 · 建筑学</small>
             </div>
           </div>
           <a href="#about" className="scroll-down" aria-label="向下了解更多">
@@ -72,12 +72,12 @@ function App() {
       </section>
 
       <section className="about section shell" id="about">
-        <div className="section-heading"><span>01 / PROFILE</span><h2>设计始于观察，<br />成于克制。</h2></div>
+        <div className="section-heading about-heading"><span>01 / PROFILE</span><div><h2>设计始于观察，成于克制。</h2><p>DESIGN BEGINS WITH OBSERVATION, TAKES FORM THROUGH RESTRAINT.</p></div></div>
         <div className="about-grid">
           <div className="portrait-wrap"><div className="portrait-frame"><img src="/portrait.jpg" alt="范钦威个人肖像" /></div><span className="image-note">PORTRAIT / 2025</span></div>
           <div className="bio">
             <p className="lead">我是一名建筑学专业的青年设计师，关注建筑与环境、使用者及城市语境之间真实而持久的关系。</p>
-            <p>本科就读于湖南工程学院建筑学专业，GPA 3.51，专业排名前 10%。在持续的竞赛与实践中，我不断探索可持续策略如何转化为空间语言，也相信好的建筑应兼具理性秩序与人的温度。</p>
+            <p>西安建筑科技大学建筑学研究生。在持续的竞赛与实践中，我不断探索可持续策略如何转化为空间语言，也相信好的建筑应兼具理性秩序与人的温度。</p>
             <div className="contact-lines">
               <a href="tel:19330235175"><Phone size={17} />193 3023 5175</a>
               <a href="mailto:2093507279@qq.com"><Mail size={17} />2093507279@qq.com</a>
