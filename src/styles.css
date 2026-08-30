@@ -124,3 +124,11 @@
 .project-rail h3{width:100%;max-width:340px;margin:8px auto 0;text-align:center}
 .project-rail time{margin-top:auto}
 @media(max-width:760px){.project-logo{margin-top:0;object-position:left center}.project-rail h3{max-width:none;margin-top:6px;text-align:left}}
+
+/* Strong numbered project identities */
+.project-identity{display:flex;flex-direction:column;align-items:center;width:100%;margin:auto 0}
+.project-identity>strong{margin-bottom:12px;font-size:18px;font-weight:700;line-height:1;letter-spacing:1.6px}
+.project-identity .project-logo{margin:0}
+.project-identity h3{font-weight:700}
+.project-rail time{margin-top:0}
+@media(max-width:760px){.project-identity{grid-column:1;grid-row:1 / span 2;align-items:flex-start;margin:0}.project-identity>strong{margin-bottom:8px;font-size:15px}.project-identity .project-logo{object-position:left center}.project-identity h3{text-align:left}.project-rail time{grid-column:2;grid-row:1}}
