@@ -86,3 +86,11 @@
 .collaboration .strength-grid article:hover>a{border-top-color:rgba(240,240,233,.2)}
 @media(max-width:1000px){.collaboration-heading>div{display:block}.collaboration-heading p{margin-top:16px;text-align:left}.collaboration .strength-grid{margin-left:0}}
 @media(max-width:680px){.collaboration .strength-grid article{min-height:300px}.collaboration .strength-grid h3{margin-top:48px;font-size:29px}}
+
+/* Project names sit beneath their identity drawings */
+.project,.project:nth-child(3n+1),.project:nth-child(4){grid-template-columns:minmax(300px,29%) minmax(0,1fr)}
+.project-rail h3{margin:8px 0 0;font-family:'Noto Serif SC',serif;font-size:clamp(15px,1.15vw,19px);font-weight:400;line-height:1.45;letter-spacing:-.25px;text-align:right;white-space:nowrap}
+.project-copy{display:flex;justify-content:flex-end;padding-top:22px}
+.project-copy p{margin:0;text-align:right}
+@media(max-width:1000px){.project,.project:nth-child(3n+1),.project:nth-child(4){grid-template-columns:minmax(260px,34%) minmax(0,1fr)}.project-rail h3{font-size:14px}.project-copy{display:flex}}
+@media(max-width:760px){.project,.project:nth-child(3n+1),.project:nth-child(4){grid-template-columns:1fr}.project-rail{grid-template-columns:minmax(0,1fr) auto;align-items:start}.project-rail h3{grid-column:1/-1;grid-row:2;margin-top:6px;font-size:clamp(14px,4vw,18px);white-space:normal}.project-rail time{grid-column:2;grid-row:1}.project-copy{padding-top:14px}.project-copy p{text-align:left}}

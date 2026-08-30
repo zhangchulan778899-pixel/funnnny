@@ -114,10 +114,10 @@ function App() {
         <div className="project-list shell">
           {projects.map((project) => (
             <article className="project" key={project.index}>
-              <div className="project-rail"><img className="project-logo" src={project.logo} alt={`${project.title}项目图标`} /><time>{project.year}</time></div>
+              <div className="project-rail"><img className="project-logo" src={project.logo} alt={`${project.title}项目图标`} /><h3>{project.title}</h3><time>{project.year}</time></div>
               <div className="project-main">
                 <div className="project-image"><img src={project.image} alt={project.title} /></div>
-                <div className="project-copy"><h3>{project.title}</h3><p>{project.subtitle}</p></div>
+                <div className="project-copy"><p>{project.subtitle}</p></div>
               </div>
             </article>
           ))}
