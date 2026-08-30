@@ -26,3 +26,5 @@
 .hero-video{object-position:center center;filter:grayscale(1) contrast(1.08) brightness(.78)}.hero-shade{background:linear-gradient(180deg,rgba(0,0,0,.46) 0%,rgba(0,0,0,.04) 34%,rgba(0,0,0,.16) 70%,rgba(0,0,0,.68) 100%),radial-gradient(ellipse at 50% 48%,rgba(0,0,0,.5) 0%,rgba(0,0,0,.28) 27%,transparent 58%)}
 .project-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:100px 34px}.project{padding:0}.project:nth-child(3n+1){grid-column:1/-1}.project-image{height:auto;aspect-ratio:4/3}.project:nth-child(3n+1) .project-image{aspect-ratio:16/8}.project-image img{filter:grayscale(.7) contrast(1.03)}.project:hover img{filter:grayscale(.12) saturate(.72)}
 @media(max-width:800px){.project-list{grid-template-columns:1fr;gap:72px}.project,.project:nth-child(3n+1){grid-column:1}.project-image,.project:nth-child(3n+1) .project-image{aspect-ratio:4/3}}
+
+.project:nth-child(4){grid-column:auto}.project:nth-child(4) .project-image{aspect-ratio:4/3}
