@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowDown, Mail, Phone, MapPin, MoveRight } from 'lucide-react'
+import { Mail, Phone, MapPin, MoveRight } from 'lucide-react'
 
 const projects = [
   {
@@ -218,10 +218,6 @@ function App() {
               <small>西安建筑科技大学 · 建筑学</small>
             </div>
           </div>
-          <a href="#works" className="scroll-down" aria-label="向下浏览建筑项目">
-            <span>向下滚动<small>SCROLL DOWN</small></span>
-            <ArrowDown size={18} />
-          </a>
         </div>
       </section>
 
