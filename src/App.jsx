@@ -118,7 +118,7 @@ function ContactSection() {
   }
 
   const copyEmail = async () => {
-    await navigator.clipboard.writeText('2093507279@qq.com')
+    await navigator.clipboard.writeText('fqw19330235175@163.com')
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1600)
   }
@@ -134,7 +134,7 @@ function ContactSection() {
           <p className="contact-typewriter">{displayed}{!done && <span className="typing-cursor" />}</p>
           <div className={`contact-actions ${actionsVisible ? 'is-visible' : ''}`}>
             {['建筑设计', '小设计', '快题设计', '作品分享'].map((label) => <a key={label} href="#collaboration">{label}</a>)}
-            <button type="button" className="contact-email" onClick={copyEmail}><span>{copied ? '邮箱已复制' : '联系我：'}<u>2093507279@qq.com</u></span><i aria-hidden="true" /></button>
+            <button type="button" className="contact-email" onClick={copyEmail}><span>{copied ? '邮箱已复制' : '联系我：'}<u>fqw19330235175@163.com</u></span><i aria-hidden="true" /></button>
           </div>
         </div>
       </div>
@@ -145,9 +145,10 @@ function ContactSection() {
 
 function App() {
   const [navScrolled, setNavScrolled] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
 
   useEffect(() => {
-    const updateNav = () => setNavScrolled(window.scrollY >= window.innerHeight - 96)
+    const updateNav = () => setNavScrolled(window.scrollY >= window.innerHeight - 160)
     updateNav()
     window.addEventListener('scroll', updateNav, { passive: true })
     window.addEventListener('resize', updateNav)
@@ -156,6 +157,15 @@ function App() {
       window.removeEventListener('resize', updateNav)
     }
   }, [])
+
+  useEffect(() => {
+    if (!profileOpen) return undefined
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setProfileOpen(false)
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [profileOpen])
 
   return (
     <main>
@@ -169,12 +179,33 @@ function App() {
           </a>
           <nav aria-label="主导航">
             <a href="#works"><strong>作品</strong><small>WORKS</small></a>
-            <a href="#about"><strong>经历</strong><small>PROFILE</small></a>
             <a href="#collaboration"><strong>合作</strong><small>COLLABORATION</small></a>
             <a href="#contact"><strong>联系</strong><small>CONTACT</small></a>
           </nav>
-          <a className="nav-contact" href="#about"><span className="person-dot" />个人介绍 <small>ABOUT</small></a>
+          <button type="button" className="nav-contact" onClick={() => setProfileOpen(true)} aria-expanded={profileOpen} aria-controls="profile-panel"><span className="person-dot" />个人介绍 <small>ABOUT</small></button>
         </header>
+        <aside className={`profile-panel ${profileOpen ? 'is-open' : ''}`} id="profile-panel" role="dialog" aria-label="个人介绍" aria-hidden={!profileOpen}>
+          <div className="profile-panel-head"><span>PROFILE / 范钦威</span><button type="button" onClick={() => setProfileOpen(false)} aria-label="关闭个人介绍">×</button></div>
+          <div className="profile-panel-body">
+            <div className="profile-panel-portrait"><img src="/portrait.jpg" alt="范钦威个人肖像" /></div>
+            <div className="profile-panel-copy">
+              <span>ARCHITECT / QINWEI FAN</span>
+              <h2>设计始于观察，<br />成于克制。</h2>
+              <p className="profile-lead">我是一名建筑学专业的青年设计师，关注建筑与环境、使用者及城市语境之间真实而持久的关系。</p>
+              <p>西安建筑科技大学建筑学研究生。在持续的竞赛与实践中，我不断探索可持续策略如何转化为空间语言，也相信好的建筑应兼具理性秩序与人的温度。</p>
+            </div>
+          </div>
+          <div className="profile-panel-stats">
+            <div><strong>10<sup>+</sup></strong><span>设计竞赛奖项</span></div>
+            <div><strong>3.51</strong><span>本科 GPA</span></div>
+            <div><strong>TOP 10<sup>%</sup></strong><span>专业成绩排名</span></div>
+          </div>
+          <div className="profile-panel-contact">
+            <a href="tel:19330235175"><Phone size={15} />193 3023 5175</a>
+            <a href="mailto:fqw19330235175@163.com"><Mail size={15} />fqw19330235175@163.com</a>
+            <span><MapPin size={15} />湖南 · 中国</span>
+          </div>
+        </aside>
         <div className="hero-content shell">
           <div className="hero-center">
             <p className="eyebrow">FUNNNNNY STUDIO · ARCHITECTURE</p>
@@ -187,36 +218,15 @@ function App() {
               <small>西安建筑科技大学 · 建筑学</small>
             </div>
           </div>
-          <a href="#about" className="scroll-down" aria-label="向下了解更多">
+          <a href="#works" className="scroll-down" aria-label="向下浏览建筑项目">
             <span>向下滚动<small>SCROLL DOWN</small></span>
             <ArrowDown size={18} />
           </a>
         </div>
       </section>
 
-      <section className="about section shell" id="about">
-        <div className="section-heading about-heading"><span>01 / PROFILE</span><div><h2>设计始于观察，成于克制。</h2><p>DESIGN BEGINS WITH OBSERVATION, TAKES FORM THROUGH RESTRAINT.</p></div></div>
-        <div className="about-grid">
-          <div className="portrait-wrap"><div className="portrait-frame"><img src="/portrait.jpg" alt="范钦威个人肖像" /></div><span className="image-note">PORTRAIT / 2025</span></div>
-          <div className="bio">
-            <p className="lead">我是一名建筑学专业的青年设计师，关注建筑与环境、使用者及城市语境之间真实而持久的关系。</p>
-            <p>西安建筑科技大学建筑学研究生。在持续的竞赛与实践中，我不断探索可持续策略如何转化为空间语言，也相信好的建筑应兼具理性秩序与人的温度。</p>
-            <div className="contact-lines">
-              <a href="tel:19330235175"><Phone size={17} />193 3023 5175</a>
-              <a href="mailto:2093507279@qq.com"><Mail size={17} />2093507279@qq.com</a>
-              <span><MapPin size={17} />湖南 · 中国</span>
-            </div>
-          </div>
-          <div className="stats">
-            <div><strong>10<sup>+</sup></strong><span>设计竞赛奖项</span></div>
-            <div><strong>3.51</strong><span>本科 GPA</span></div>
-            <div><strong>TOP 10<sup>%</sup></strong><span>专业成绩排名</span></div>
-          </div>
-        </div>
-      </section>
-
       <section className="works section" id="works">
-        <div className="shell section-heading works-heading"><span>02 / SELECTED WORKS</span><h2>精选项目</h2><p>对气候、场地与公共生活的阶段性回应</p></div>
+        <div className="shell section-heading works-heading"><span>01 / ARCHITECTURE PROJECTS</span><h2>建筑项目</h2></div>
         <div className="project-list shell">
           {projects.map((project) => (
             <article className="project" key={project.index}>
@@ -231,9 +241,9 @@ function App() {
       </section>
 
       <section className="strengths collaboration section shell" id="collaboration">
-        <div className="section-heading collaboration-heading"><span>03 / COLLABORATION</span><div><h2>合作展示</h2><p>从建筑到表达，承接多尺度设计委托。</p></div></div>
+        <div className="section-heading collaboration-heading"><span>02 / COLLABORATION</span><div><h2>合作展示</h2><p>从建筑到表达，承接多尺度设计委托。</p></div></div>
         <div className="strength-grid">
-          {collaborations.map(([num, title, english, text]) => <article key={num}><span>{num} / {english}</span><h3>{title}</h3><p>{text}</p><a href="mailto:2093507279@qq.com" aria-label={`咨询${title}`}>合作咨询 <MoveRight size={18} /></a></article>)}
+          {collaborations.map(([num, title, english, text]) => <article key={num}><span>{num} / {english}</span><h3>{title}</h3><p>{text}</p><a href="mailto:fqw19330235175@163.com" aria-label={`咨询${title}`}>合作咨询 <MoveRight size={18} /></a></article>)}
         </div>
       </section>
 

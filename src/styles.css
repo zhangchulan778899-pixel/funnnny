@@ -141,5 +141,29 @@
 .nav.is-scrolled .brand img.brand-mark{filter:none;opacity:.9}
 .nav.is-scrolled .nav-contact,.nav.is-scrolled nav a{opacity:.86}
 .nav.is-scrolled .nav-contact:hover,.nav.is-scrolled nav a:hover{opacity:1}
-#about,#works,#collaboration,#contact{scroll-margin-top:100px}
+#works,#collaboration,#contact{scroll-margin-top:100px}
 @media(max-width:680px){.hero{padding-top:72px}.hero-content{height:100%}.nav.is-scrolled{top:10px;height:62px;padding-inline:16px;border-radius:13px}}
+
+/* First-screen profile drawer */
+.nav-contact{appearance:none;background:transparent;color:inherit;outline:0}
+.profile-panel{position:absolute;z-index:24;top:104px;bottom:34px;left:max(56px,calc((100vw - 1700px)/2));width:min(690px,46vw);display:flex;flex-direction:column;padding:24px 26px 22px;overflow:auto;color:#171813;background:rgba(238,239,234,.76);border:1px solid rgba(255,255,255,.55);border-radius:18px;box-shadow:0 24px 70px rgba(9,11,8,.26);-webkit-backdrop-filter:blur(26px) saturate(135%);backdrop-filter:blur(26px) saturate(135%);opacity:0;visibility:hidden;pointer-events:none;transform:translateX(-28px);transition:opacity .38s ease,transform .45s cubic-bezier(.2,.75,.25,1),visibility .38s}
+.profile-panel.is-open{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(0)}
+.profile-panel-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(23,24,19,.2);font-size:9px;letter-spacing:2px}
+.profile-panel-head button{width:30px;height:30px;padding:0;border:1px solid rgba(23,24,19,.25);border-radius:50%;background:rgba(255,255,255,.16);color:inherit;font:300 24px/26px 'DM Sans',sans-serif;transition:background-color .2s,color .2s}
+.profile-panel-head button:hover{background:#171813;color:#f0f0e9}
+.profile-panel-body{display:grid;grid-template-columns:31% minmax(0,1fr);gap:24px;padding:22px 0 18px}
+.profile-panel-portrait{align-self:start;aspect-ratio:4/5;overflow:hidden;background:rgba(23,24,19,.08)}
+.profile-panel-portrait img{height:100%;object-fit:cover;object-position:center 24%;filter:grayscale(1)}
+.profile-panel-copy>span{font-size:8px;letter-spacing:1.8px;color:#67695f}
+.profile-panel-copy h2{margin:12px 0 18px;font-family:'Noto Serif SC',serif;font-size:clamp(25px,2.15vw,36px);font-weight:400;line-height:1.35;letter-spacing:-1px}
+.profile-panel-copy p{margin:0;font-size:11px;line-height:1.8;color:#56584f}
+.profile-panel-copy .profile-lead{margin-bottom:12px;font-family:'Noto Serif SC',serif;font-size:13px;line-height:1.7;color:#171813}
+.profile-panel-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(23,24,19,.22);border-bottom:1px solid rgba(23,24,19,.22)}
+.profile-panel-stats div{display:flex;flex-direction:column;gap:5px;padding:14px 12px;border-right:1px solid rgba(23,24,19,.16)}
+.profile-panel-stats div:first-child{padding-left:0}.profile-panel-stats div:last-child{border-right:0}
+.profile-panel-stats strong{font-size:24px;font-weight:400;letter-spacing:-1px}.profile-panel-stats sup{font-size:10px}.profile-panel-stats span{font-size:9px;letter-spacing:.7px;color:#67695f}
+.profile-panel-contact{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;margin-top:auto;padding-top:17px}
+.profile-panel-contact a,.profile-panel-contact span{display:inline-flex;align-items:center;gap:7px;font-size:10px;white-space:nowrap}
+@media(max-width:1000px){.profile-panel{left:24px;width:min(650px,calc(100vw - 48px))}}
+@media(max-width:680px){.profile-panel{top:86px;bottom:18px;left:16px;width:calc(100vw - 32px);padding:18px;border-radius:15px}.profile-panel-body{grid-template-columns:100px minmax(0,1fr);gap:16px;padding:18px 0 14px}.profile-panel-copy h2{font-size:23px;margin:8px 0 12px}.profile-panel-copy p{font-size:10px;line-height:1.65}.profile-panel-copy .profile-lead{font-size:11px}.profile-panel-stats strong{font-size:20px}.profile-panel-stats span{font-size:8px}.profile-panel-contact{margin-top:16px;padding-top:0}.profile-panel-contact a,.profile-panel-contact span{font-size:9px}}
+@media(max-width:430px){.profile-panel-body{grid-template-columns:82px minmax(0,1fr)}.profile-panel-copy h2{font-size:20px}.profile-panel-copy p:not(.profile-lead){display:none}.profile-panel-stats div{padding:11px 6px}.profile-panel-contact{gap:8px 12px}}
