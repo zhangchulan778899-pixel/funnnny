@@ -127,6 +127,33 @@ const commercialArchitectureProject = {
   ],
 }
 
+const collaborationCollections = collaborations.map(([num, title, english, description]) => ({
+  num,
+  title,
+  english,
+  description,
+  projects: Array.from({ length: 4 }, (_, index) => {
+    if (num === '01' && index === 0) {
+      return {
+        id: 'C01',
+        title: commercialArchitectureProject.title,
+        subtitle: '工业遗产活化改造 / 商业委托',
+        year: commercialArchitectureProject.year,
+        image: commercialArchitectureProject.image,
+        project: commercialArchitectureProject,
+      }
+    }
+
+    const projectNumber = String(index + 1).padStart(2, '0')
+    return {
+      id: `${num}.${projectNumber}`,
+      title: `${title}项目 ${projectNumber}`,
+      subtitle: 'PROJECT FRAMEWORK / 内容待补充',
+      year: '—',
+    }
+  }),
+}))
+
 const competitionExperience = [
   { year: '2025', title: '全国第七届高等院校绿色建筑技能大赛', award: '一等奖' },
   { year: '2025', title: '湖南省大学生可持续建筑竞赛', award: '一等奖' },
@@ -305,11 +332,59 @@ function ProjectViewer({ project, onClose }) {
   )
 }
 
+function CollaborationCollection({ collection, onClose, onOpenProject }) {
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = previousOverflow }
+  }, [])
+
+  return (
+    <section className="collaboration-collection" role="dialog" aria-modal="true" aria-label={`${collection.title}项目列表`}>
+      <header className="collection-header">
+        <button type="button" className="collection-close" onClick={onClose} aria-label="返回合作展示"><X size={18} /><span>返回合作</span></button>
+        <div className="collection-header-title"><span>{collection.num} / COLLABORATION</span><strong>{collection.title}</strong></div>
+        <span className="collection-count">04 PROJECTS</span>
+      </header>
+
+      <div className="collection-intro shell">
+        <span>{collection.english}</span>
+        <div><h2>{collection.title}</h2><p>{collection.description}</p></div>
+      </div>
+
+      <div className="collection-grid shell">
+        {collection.projects.map((item, index) => (
+          <article className={`collection-card ${item.project ? 'is-available' : 'is-placeholder'}`} key={item.id}>
+            {item.project ? (
+              <button type="button" className="collection-card-image" onClick={() => onOpenProject(item.project)} aria-label={`查看${item.title}项目详情`}>
+                <img src={item.image} alt={item.title} />
+                <span>查看详情 <MoveRight size={17} /></span>
+              </button>
+            ) : (
+              <div className="collection-card-placeholder" aria-label={`${item.title}内容待补充`}>
+                <strong>{collection.num}.{String(index + 1).padStart(2, '0')}</strong>
+                <span>CONTENT TO FOLLOW</span>
+              </div>
+            )}
+            <div className="collection-card-copy">
+              <small>{collection.title}</small>
+              <h3>{item.title}</h3>
+              <p>{item.subtitle}</p>
+            </div>
+            <footer><time>{item.year}</time><span>{item.project ? '查看项目' : '项目框架'}</span></footer>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function App() {
   const [navScrolled, setNavScrolled] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
   const [pricingOpen, setPricingOpen] = useState(false)
   const [activeProject, setActiveProject] = useState(null)
+  const [activeCollection, setActiveCollection] = useState(null)
 
   useEffect(() => {
     const updateNav = () => setNavScrolled(window.scrollY >= window.innerHeight - 160)
@@ -463,6 +538,7 @@ function App() {
         </div>
       </section>
 
+      {activeCollection && <CollaborationCollection collection={activeCollection} onClose={() => setActiveCollection(null)} onOpenProject={setActiveProject} />}
       {activeProject && <ProjectViewer project={activeProject} onClose={() => setActiveProject(null)} />}
 
       <section className="strengths collaboration section shell" id="collaboration">
@@ -471,7 +547,7 @@ function App() {
           {collaborations.map(([num, title, english, text]) => (
             <article key={num}>
               <span>{num} / {english}</span><h3>{title}</h3><p>{text}</p>
-              <button type="button" className="collaboration-project-link" onClick={() => { if (num === '01') setActiveProject(commercialArchitectureProject) }} disabled={num !== '01'} aria-label={num === '01' ? `查看${title}商单项目` : `${title}项目内容待更新`}>查看项目 <MoveRight size={18} /></button>
+              <button type="button" className="collaboration-project-link" onClick={() => setActiveCollection(collaborationCollections.find((collection) => collection.num === num))} aria-label={`查看${title}项目列表`}>查看项目 <MoveRight size={18} /></button>
             </article>
           ))}
         </div>
