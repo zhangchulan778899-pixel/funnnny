@@ -25,6 +25,13 @@ const projects = [
     year: '2025',
     image: '/project-02.png',
     logo: '/project-logo-02.png',
+    gallery: [
+      { src: '/project-02-gallery/autumn-aerial.jpg', caption: '秋季鸟瞰 · AUTUMN AERIAL VIEW' },
+      { src: '/project-02-gallery/farmland-water-tower.jpg', caption: '农田水塔 · FARMLAND WATER TOWER' },
+      { src: '/project-02-gallery/night-view-01.jpg', caption: '夜景一 · NIGHT VIEW 01' },
+      { src: '/project-02-gallery/night-view-02.jpg', caption: '夜景二 · NIGHT VIEW 02' },
+      { src: '/project-02-gallery/night-view-03.jpg', caption: '夜景三 · NIGHT VIEW 03' },
+    ],
   },
   {
     index: '03',
