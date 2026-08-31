@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Mail, Phone, MapPin, MoveRight } from 'lucide-react'
+import { Mail, Phone, MapPin, MoveRight, ChevronLeft, ChevronRight, X } from 'lucide-react'
 
 const projects = [
   {
@@ -9,6 +9,14 @@ const projects = [
     year: '2025',
     image: '/project-01.png',
     logo: '/project-logo-01.png',
+    gallery: [
+      { src: '/project-01-gallery/aerial.jpg', caption: '整体鸟瞰 · OVERALL AERIAL VIEW' },
+      { src: '/project-01-gallery/winter-aerial.jpg', caption: '冬季鸟瞰 · WINTER AERIAL VIEW' },
+      { src: '/project-01-gallery/entrance-bridge.jpg', caption: '入户桥 · ENTRANCE BRIDGE' },
+      { src: '/project-01-gallery/waterside.jpg', caption: '水系界面 · WATERSIDE INTERFACE' },
+      { src: '/project-01-gallery/roof-corridor.jpg', caption: '屋顶连廊 · ROOFTOP CORRIDOR' },
+      { src: '/project-01-gallery/papermaking-workshop.jpg', caption: '抄纸作坊 · PAPERMAKING WORKSHOP' },
+    ],
   },
   {
     index: '02',
@@ -143,9 +151,85 @@ function ContactSection() {
   )
 }
 
+function ProjectViewer({ project, onClose }) {
+  const viewportRef = useRef(null)
+  const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0 })
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const gallery = project.gallery || [{ src: project.image, caption: '项目主效果图 · PROJECT VIEW' }]
+
+  const goTo = (nextIndex) => {
+    const boundedIndex = Math.max(0, Math.min(gallery.length - 1, nextIndex))
+    const viewport = viewportRef.current
+    if (viewport) viewport.scrollTo({ left: viewport.clientWidth * boundedIndex, behavior: 'smooth' })
+    setCurrentIndex(boundedIndex)
+  }
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key === 'ArrowLeft') goTo(currentIndex - 1)
+      if (event.key === 'ArrowRight') goTo(currentIndex + 1)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [currentIndex, onClose])
+
+  const handleScroll = (event) => {
+    const viewport = event.currentTarget
+    setCurrentIndex(Math.round(viewport.scrollLeft / viewport.clientWidth))
+  }
+
+  const startDrag = (event) => {
+    const viewport = event.currentTarget
+    dragRef.current = { active: true, startX: event.clientX, scrollLeft: viewport.scrollLeft }
+    viewport.setPointerCapture(event.pointerId)
+    viewport.classList.add('is-dragging')
+  }
+
+  const moveDrag = (event) => {
+    if (!dragRef.current.active) return
+    event.currentTarget.scrollLeft = dragRef.current.scrollLeft - (event.clientX - dragRef.current.startX)
+  }
+
+  const endDrag = (event) => {
+    if (!dragRef.current.active) return
+    dragRef.current.active = false
+    event.currentTarget.classList.remove('is-dragging')
+    goTo(Math.round(event.currentTarget.scrollLeft / event.currentTarget.clientWidth))
+  }
+
+  return (
+    <section className="project-viewer" role="dialog" aria-modal="true" aria-label={`${project.title}项目详情`}>
+      <header className="project-viewer-header">
+        <button type="button" className="project-viewer-close" onClick={onClose} aria-label="关闭项目详情"><X size={19} /><span>返回项目</span></button>
+        <div className="project-viewer-title"><span>{project.index} / {project.year}</span><strong>{project.title}</strong><small>{project.subtitle}</small></div>
+        <div className="project-viewer-controls">
+          <span>{String(currentIndex + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}</span>
+          <button type="button" onClick={() => goTo(currentIndex - 1)} disabled={currentIndex === 0} aria-label="上一张效果图"><ChevronLeft size={20} /></button>
+          <button type="button" onClick={() => goTo(currentIndex + 1)} disabled={currentIndex === gallery.length - 1} aria-label="下一张效果图"><ChevronRight size={20} /></button>
+        </div>
+      </header>
+      <div className="project-viewer-viewport" ref={viewportRef} onScroll={handleScroll} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
+        {gallery.map((item, index) => (
+          <figure className="project-viewer-slide" key={item.src}>
+            <img src={item.src} alt={`${project.title}—${item.caption}`} loading={index === 0 ? 'eager' : 'lazy'} draggable="false" />
+            <figcaption><span>{item.caption}</span><small>拖动或滑动浏览 · DRAG / SWIPE</small></figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function App() {
   const [navScrolled, setNavScrolled] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [activeProject, setActiveProject] = useState(null)
 
   useEffect(() => {
     const updateNav = () => setNavScrolled(window.scrollY >= window.innerHeight - 160)
@@ -228,13 +312,15 @@ function App() {
             <article className="project" key={project.index}>
               <div className="project-rail"><div className="project-identity"><strong>{project.index}</strong><img className="project-logo" src={project.logo} alt={`${project.title}项目图标`} /><h3>{project.title}</h3></div><time>{project.year}</time></div>
               <div className="project-main">
-                <div className="project-image"><img src={project.image} alt={project.title} /></div>
+                <button type="button" className="project-image" onClick={() => setActiveProject(project)} aria-label={`查看${project.title}项目详情`}><img src={project.image} alt={project.title} /><span className="project-open-cue">查看项目 <MoveRight size={17} /></span></button>
                 <div className="project-copy"><p>{project.subtitle}</p></div>
               </div>
             </article>
           ))}
         </div>
       </section>
+
+      {activeProject && <ProjectViewer project={activeProject} onClose={() => setActiveProject(null)} />}
 
       <section className="strengths collaboration section shell" id="collaboration">
         <div className="section-heading collaboration-heading"><span>02 / COLLABORATION</span><div><h2>合作展示</h2><p>从建筑到表达，承接多尺度设计委托。</p></div></div>
