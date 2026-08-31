@@ -57,6 +57,18 @@ const projects = [
     year: '2026',
     image: '/project-04.jpg',
     logo: '/project-logo-04.png',
+    gallery: [
+      { src: '/project-04-gallery/autumn-aerial.jpg', caption: '秋季鸟瞰 · AUTUMN AERIAL VIEW' },
+      { src: '/project-04-gallery/aerial.jpg', caption: '整体鸟瞰 · OVERALL AERIAL VIEW' },
+      { src: '/project-04-gallery/spring-equinox.jpg', caption: '春分时景 · SPRING EQUINOX' },
+      { src: '/project-04-gallery/grassland.jpg', caption: '草地界面 · GRASSLAND FRONTAGE' },
+      { src: '/project-04-gallery/vertical-circulation.jpg', caption: '垂直交通 · VERTICAL CIRCULATION' },
+      { src: '/project-04-gallery/office-area.jpg', caption: '办公区 · OFFICE AREA' },
+      { src: '/project-04-gallery/overall-space.jpg', caption: '整体空间 · OVERALL SPACE' },
+      { src: '/project-04-gallery/courtyard.jpg', caption: '庭院 · COURTYARD' },
+      { src: '/project-04-gallery/lounge-area.jpg', caption: '休闲区 · LOUNGE AREA' },
+      { src: '/project-04-gallery/night-view.jpg', caption: '夜景 · NIGHT VIEW' },
+    ],
   },
   {
     index: '05',
