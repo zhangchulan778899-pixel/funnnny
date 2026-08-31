@@ -213,6 +213,41 @@
 /* User-supplied fine-grain frosted glass material */
 .profile-panel{isolation:isolate;background:rgba(240,241,237,.5);border-color:rgba(255,255,255,.42);-webkit-backdrop-filter:blur(22px) saturate(118%) contrast(104%);backdrop-filter:blur(22px) saturate(118%) contrast(104%)}
 .profile-panel::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;background:url('/glass-texture.jpg') center/520px auto repeat;opacity:.2;mix-blend-mode:multiply;pointer-events:none}
+
+/* Navigation pricing entry + quotation panel */
+.nav-actions{min-width:300px;display:flex;align-items:center;justify-content:flex-end;gap:24px}
+.nav-pricing,.nav-actions .nav-contact{appearance:none;display:flex;align-items:center;gap:9px;min-width:0;padding:0;border:0;border-radius:0;background:transparent;color:inherit;outline:0;font-family:'Noto Serif SC',serif;font-size:12px;white-space:nowrap;transition:opacity .2s ease}
+.nav-pricing:hover,.nav-actions .nav-contact:hover{opacity:.72}
+.nav-pricing small,.nav-actions .nav-contact small{margin:0;font-family:'DM Sans',sans-serif;font-size:7px;letter-spacing:1px;opacity:.52}
+.pricing-dot{width:13px;height:13px;border:1px solid currentColor;position:relative;transform:rotate(45deg)}
+.pricing-dot::after{content:'';position:absolute;inset:3px;border:1px solid currentColor}
+.nav.is-scrolled .nav-pricing{opacity:.86}.nav.is-scrolled .nav-pricing:hover{opacity:1}
+
+.pricing-panel{padding-bottom:19px;scrollbar-width:thin;scrollbar-color:rgba(23,24,19,.3) transparent}
+.pricing-intro{padding:20px 0 17px;border-bottom:1px solid rgba(23,24,19,.2)}
+.pricing-intro>span{font-size:8px;letter-spacing:2.1px;color:#7f302b}
+.pricing-intro h2{display:flex;align-items:baseline;gap:12px;margin:8px 0 7px;font-family:'Noto Serif SC',serif;font-size:clamp(25px,2vw,34px);font-weight:400;letter-spacing:-1px}
+.pricing-intro h2 em{font-family:'Noto Sans SC',sans-serif;font-size:10px;font-style:normal;font-weight:400;letter-spacing:1.8px;color:#7f302b}
+.pricing-intro p{margin:0;font-size:9px;line-height:1.7;color:#66685f}
+.pricing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-left:1px solid rgba(23,24,19,.16)}
+.pricing-grid article{min-height:106px;padding:14px 15px 12px;border-right:1px solid rgba(23,24,19,.16);border-bottom:1px solid rgba(23,24,19,.16)}
+.pricing-grid article.pricing-feature{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;column-gap:26px;background:rgba(127,48,43,.055)}
+.pricing-grid article.pricing-feature h3{grid-column:1/-1}
+.pricing-grid h3{display:flex;align-items:baseline;gap:7px;margin:0 0 11px;font-family:'Noto Serif SC',serif;font-size:12px;font-weight:500}
+.pricing-grid h3>span{font-family:'DM Sans',sans-serif;font-size:8px;letter-spacing:1px;color:#7f302b}
+.pricing-grid h3 small{font-family:'DM Sans',sans-serif;font-size:6px;font-weight:400;letter-spacing:1px;color:#777970}
+.pricing-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:4px 0;font-size:10px;color:#4f514a}
+.pricing-row strong{font-size:11px;font-weight:500;white-space:nowrap;color:#7f302b}
+.pricing-terms{padding:15px 0 0}
+.pricing-terms>span{font-size:8px;letter-spacing:1.8px;color:#7f302b}
+.pricing-terms ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 25px;margin:10px 0 0;padding:0;list-style:none;counter-reset:pricing-term}
+.pricing-terms li{position:relative;padding-left:18px;font-size:8.5px;line-height:1.6;color:#55574f;counter-increment:pricing-term}
+.pricing-terms li::before{content:counter(pricing-term,decimal-leading-zero);position:absolute;left:0;top:0;font-family:'DM Sans',sans-serif;font-size:7px;color:#7f302b}
+.pricing-contact{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:11px;border-top:1px solid rgba(23,24,19,.22);font-family:'Noto Serif SC',serif;font-size:10px;letter-spacing:1px}
+
+@media(max-width:1000px){.nav-actions{min-width:0;gap:20px}.pricing-grid article{min-height:100px}}
+@media(max-width:680px){.nav-actions{gap:14px}.nav-pricing,.nav-actions .nav-contact{font-size:10px;gap:6px}.nav-pricing small,.nav-actions .nav-contact small,.person-dot,.pricing-dot{display:none}.pricing-panel{top:86px}.pricing-intro{padding:16px 0 14px}.pricing-intro h2{font-size:23px}.pricing-grid{grid-template-columns:1fr}.pricing-grid article{min-height:auto;padding:12px}.pricing-grid article.pricing-feature{grid-column:auto;display:block}.pricing-grid article.pricing-feature h3{grid-column:auto}.pricing-terms ol{grid-template-columns:1fr}.pricing-terms li{font-size:8px}}
+@media(max-width:430px){.nav-actions{gap:10px}.nav-pricing,.nav-actions .nav-contact{font-size:9px}.pricing-panel{padding-inline:15px}.pricing-intro h2{font-size:20px}.pricing-intro h2 em{font-size:8px}.pricing-grid h3{margin-bottom:7px}.pricing-row{font-size:9px}.pricing-row strong{font-size:10px}}
 .nav.is-scrolled{isolation:isolate;overflow:hidden;background:rgba(242,243,238,.46);border-color:rgba(23,24,19,.11);box-shadow:0 14px 42px rgba(22,24,19,.09);-webkit-backdrop-filter:blur(22px) saturate(122%) contrast(103%);backdrop-filter:blur(22px) saturate(122%) contrast(103%)}
 .nav.is-scrolled::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;background:url('/glass-texture.jpg') center/420px auto repeat;opacity:.16;mix-blend-mode:multiply;pointer-events:none}
 

@@ -264,6 +264,7 @@ function ProjectViewer({ project, onClose }) {
 function App() {
   const [navScrolled, setNavScrolled] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [pricingOpen, setPricingOpen] = useState(false)
   const [activeProject, setActiveProject] = useState(null)
 
   useEffect(() => {
@@ -278,13 +279,16 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!profileOpen) return undefined
+    if (!profileOpen && !pricingOpen) return undefined
     const closeOnEscape = (event) => {
-      if (event.key === 'Escape') setProfileOpen(false)
+      if (event.key === 'Escape') {
+        setProfileOpen(false)
+        setPricingOpen(false)
+      }
     }
     window.addEventListener('keydown', closeOnEscape)
     return () => window.removeEventListener('keydown', closeOnEscape)
-  }, [profileOpen])
+  }, [profileOpen, pricingOpen])
 
   return (
     <main>
@@ -301,7 +305,10 @@ function App() {
             <a href="#collaboration"><strong>合作</strong><small>COLLABORATION</small></a>
             <a href="#contact"><strong>联系</strong><small>CONTACT</small></a>
           </nav>
-          <button type="button" className="nav-contact" onClick={() => setProfileOpen(true)} aria-expanded={profileOpen} aria-controls="profile-panel"><span className="person-dot" />个人介绍 <small>ABOUT</small></button>
+          <div className="nav-actions">
+            <button type="button" className="nav-pricing" onClick={() => { setPricingOpen((open) => !open); setProfileOpen(false) }} aria-expanded={pricingOpen} aria-controls="pricing-panel"><span className="pricing-dot" aria-hidden="true" />明细 <small>PRICING</small></button>
+            <button type="button" className="nav-contact" onClick={() => { setProfileOpen((open) => !open); setPricingOpen(false) }} aria-expanded={profileOpen} aria-controls="profile-panel"><span className="person-dot" />个人介绍 <small>ABOUT</small></button>
+          </div>
         </header>
         <aside className={`profile-panel ${profileOpen ? 'is-open' : ''}`} id="profile-panel" role="dialog" aria-label="个人介绍" aria-hidden={!profileOpen}>
           <div className="profile-panel-head"><span>PROFILE / 范钦威</span><button type="button" onClick={() => setProfileOpen(false)} aria-label="关闭个人介绍">×</button></div>
@@ -324,6 +331,48 @@ function App() {
             <a href="mailto:fqw19330235175@163.com"><Mail size={15} />fqw19330235175@163.com</a>
             <span><MapPin size={15} />湖南 · 中国</span>
           </div>
+        </aside>
+        <aside className={`profile-panel pricing-panel ${pricingOpen ? 'is-open' : ''}`} id="pricing-panel" role="dialog" aria-label="报价明细" aria-hidden={!pricingOpen}>
+          <div className="profile-panel-head"><span>PRICING / 报价明细</span><button type="button" onClick={() => setPricingOpen(false)} aria-label="关闭报价明细">×</button></div>
+          <div className="pricing-intro">
+            <span>STUDIO OF FUNNNNNY</span>
+            <h2>图纸报价表<em>及收款说明</em></h2>
+            <p>以下为基础参考价格，具体费用将根据项目体量、时间与需求确定。</p>
+          </div>
+          <div className="pricing-grid">
+            <article>
+              <h3><span>01</span>效果图 <small>RENDERING</small></h3>
+              <div className="pricing-row"><span>鸟瞰单张</span><strong>¥200–300</strong></div>
+              <div className="pricing-row"><span>人视单张</span><strong>¥100–180</strong></div>
+            </article>
+            <article>
+              <h3><span>02</span>技术图纸 <small>TECHNICAL DRAWING</small></h3>
+              <div className="pricing-row"><span>平、立、剖面图</span><strong>¥100–150</strong></div>
+            </article>
+            <article>
+              <h3><span>03</span>分析图 <small>ANALYSIS CHART</small></h3>
+              <div className="pricing-row"><span>分析图</span><strong>¥80–120</strong></div>
+            </article>
+            <article>
+              <h3><span>04</span>整套设计 <small>THE WHOLE DESIGN</small></h3>
+              <div className="pricing-row"><span>整套设计文本</span><strong>¥3,500 起</strong></div>
+            </article>
+            <article className="pricing-feature">
+              <h3><span>05</span>作品集辅导 <small>PORTFOLIO GUIDANCE</small></h3>
+              <div className="pricing-row"><span>作品集优化辅导</span><strong>¥900</strong></div>
+              <div className="pricing-row"><span>单个设计作品购买</span><strong>¥3,500</strong></div>
+            </article>
+          </div>
+          <div className="pricing-terms">
+            <span>PAYMENT / 收款说明</span>
+            <ol>
+              <li>预收 60% 定金，剩余 40% 于最后交图、源文件及图纸打包整理后支付。</li>
+              <li>对比其他工作室，可以接受多次修改要求。</li>
+              <li>下单数量够多，报价可享受优惠。</li>
+              <li>整套建筑设计接单，根据预留时间、需求及内容再确定精确报价。</li>
+            </ol>
+          </div>
+          <a className="pricing-contact" href="mailto:fqw19330235175@163.com">咨询合作 <MoveRight size={16} /></a>
         </aside>
         <div className="hero-content shell">
           <div className="hero-center">
