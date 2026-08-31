@@ -31,6 +31,7 @@ const projects = [
       { src: '/project-02-gallery/night-view-01.jpg', caption: '夜景一 · NIGHT VIEW 01' },
       { src: '/project-02-gallery/night-view-02.jpg', caption: '夜景二 · NIGHT VIEW 02' },
       { src: '/project-02-gallery/night-view-03.jpg', caption: '夜景三 · NIGHT VIEW 03' },
+      { src: '/project-02-gallery/waterside-reflection.jpg', caption: '湖畔倒影 · WATERSIDE REFLECTION' },
     ],
   },
   {
@@ -40,6 +41,14 @@ const projects = [
     year: '2024',
     image: '/project-03.png',
     logo: '/project-logo-03.png',
+    gallery: [
+      { src: '/project-03-gallery/autumn-aerial.jpg', caption: '秋季鸟瞰 · AUTUMN AERIAL VIEW' },
+      { src: '/project-03-gallery/autumn-view.jpg', caption: '秋季全景 · AUTUMN PANORAMA' },
+      { src: '/project-03-gallery/wave-polycarbonate.jpg', caption: '波浪阳光板 · WAVE POLYCARBONATE FACADE' },
+      { src: '/project-03-gallery/vertical-circulation.jpg', caption: '垂直交通 · VERTICAL CIRCULATION' },
+      { src: '/project-03-gallery/platform.jpg', caption: '共享平台 · SHARED PLATFORM' },
+      { src: '/project-03-gallery/studio-hall.jpg', caption: '演播厅 · STUDIO HALL' },
+    ],
   },
   {
     index: '04',
