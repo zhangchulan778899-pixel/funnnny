@@ -77,6 +77,13 @@ const projects = [
     year: '2023',
     image: '/project-05.jpg',
     logo: '/project-logo-05.png',
+    gallery: [
+      { src: '/project-05-gallery/aerial.jpg', caption: '整体鸟瞰 · OVERALL AERIAL VIEW' },
+      { src: '/project-05-gallery/entrance.jpg', caption: '入口界面 · ENTRANCE FRONTAGE' },
+      { src: '/project-05-gallery/courtyard.jpg', caption: '庭院 · COURTYARD' },
+      { src: '/project-05-gallery/tea-room.jpg', caption: '茶室 · TEA ROOM' },
+      { src: '/project-05-gallery/guest-room.jpg', caption: '客房 · GUEST ROOM' },
+    ],
   },
 ]
 
