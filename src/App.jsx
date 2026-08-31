@@ -94,6 +94,17 @@ const collaborations = [
   ['04', '作品分享', 'PORTFOLIO SHARING', '持续整理设计过程、图纸表达与作品集经验，也欢迎围绕建筑学习与创作展开内容合作。'],
 ]
 
+const competitionExperience = [
+  { year: '2025', title: '全国第七届高等院校绿色建筑技能大赛', award: '一等奖' },
+  { year: '2025', title: '湖南省大学生可持续建筑竞赛', award: '一等奖' },
+  { year: '2024', title: '湖南省大学生可持续建筑竞赛', award: '二等奖' },
+  { year: '2024', title: '园冶杯大学生国际竞赛', award: '荣誉奖' },
+  { year: '2024', title: '首届 D5 杯全国高校设计大赛', award: '优秀奖 · NO.12' },
+  { year: '2023', title: '湖南省大学生可持续建筑竞赛', award: '三等奖' },
+  { year: '2023', title: '湖南省顶峰设计竞赛', award: '铜奖' },
+  { year: '2023', title: '首届湖南省大学生节能减排社会实践与科技竞赛', award: '三等奖' },
+]
+
 const contactMessage = '很高兴你来到这里。告诉我你的场地、想法与时间，我们从一封邮件开始。'
 
 function useTypewriter(text, speed = 38, startDelay = 600) {
@@ -326,6 +337,21 @@ function App() {
             <div><strong>3.51</strong><span>本科 GPA</span></div>
             <div><strong>TOP 10<sup>%</sup></strong><span>专业成绩排名</span></div>
           </div>
+          <section className="profile-competitions" aria-labelledby="competition-heading">
+            <div className="profile-competitions-head">
+              <span id="competition-heading">COMPETITIONS / 竞赛经历</span>
+              <small>AWARDS · 2023—2025</small>
+            </div>
+            <div className="profile-competition-grid">
+              {competitionExperience.map((item) => (
+                <article key={`${item.year}-${item.title}`}>
+                  <time>{item.year}</time>
+                  <p>{item.title}</p>
+                  <strong>{item.award}</strong>
+                </article>
+              ))}
+            </div>
+          </section>
           <div className="profile-panel-contact">
             <a href="tel:19330235175"><Phone size={15} />193 3023 5175</a>
             <a href="mailto:fqw19330235175@163.com"><Mail size={15} />fqw19330235175@163.com</a>

@@ -162,11 +162,17 @@
 .profile-panel-stats div{display:flex;flex-direction:column;gap:5px;padding:14px 12px;border-right:1px solid rgba(23,24,19,.16)}
 .profile-panel-stats div:first-child{padding-left:0}.profile-panel-stats div:last-child{border-right:0}
 .profile-panel-stats strong{font-size:24px;font-weight:400;letter-spacing:-1px}.profile-panel-stats sup{font-size:10px}.profile-panel-stats span{font-size:9px;letter-spacing:.7px;color:#67695f}
+.profile-competitions{padding-top:17px}
+.profile-competitions-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid rgba(23,24,19,.22)}
+.profile-competitions-head>span{font-size:8px;letter-spacing:1.8px;color:#171813}.profile-competitions-head small{font-size:7px;letter-spacing:1.25px;color:#777970}
+.profile-competition-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-left:1px solid rgba(23,24,19,.14)}
+.profile-competition-grid article{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr);grid-template-areas:'year title' 'year award';column-gap:9px;min-height:61px;padding:10px 11px;border-right:1px solid rgba(23,24,19,.14);border-bottom:1px solid rgba(23,24,19,.14)}
+.profile-competition-grid time{grid-area:year;padding-top:1px;font-size:8px;letter-spacing:.5px;color:#7f302b}.profile-competition-grid p{grid-area:title;margin:0;font-family:'Noto Serif SC',serif;font-size:9px;line-height:1.45;color:#34362f}.profile-competition-grid strong{grid-area:award;align-self:end;margin-top:5px;font-size:7.5px;font-weight:500;letter-spacing:.5px;color:#7f302b}
 .profile-panel-contact{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;margin-top:auto;padding-top:17px}
 .profile-panel-contact a,.profile-panel-contact span{display:inline-flex;align-items:center;gap:7px;font-size:10px;white-space:nowrap}
 @media(max-width:1000px){.profile-panel{left:24px;width:min(650px,calc(100vw - 48px))}}
-@media(max-width:680px){.profile-panel{top:86px;bottom:18px;left:16px;width:calc(100vw - 32px);padding:18px;border-radius:15px}.profile-panel-body{grid-template-columns:100px minmax(0,1fr);gap:16px;padding:18px 0 14px}.profile-panel-copy h2{font-size:23px;margin:8px 0 12px}.profile-panel-copy p{font-size:10px;line-height:1.65}.profile-panel-copy .profile-lead{font-size:11px}.profile-panel-stats strong{font-size:20px}.profile-panel-stats span{font-size:8px}.profile-panel-contact{margin-top:16px;padding-top:0}.profile-panel-contact a,.profile-panel-contact span{font-size:9px}}
-@media(max-width:430px){.profile-panel-body{grid-template-columns:82px minmax(0,1fr)}.profile-panel-copy h2{font-size:20px}.profile-panel-copy p:not(.profile-lead){display:none}.profile-panel-stats div{padding:11px 6px}.profile-panel-contact{gap:8px 12px}}
+@media(max-width:680px){.profile-panel{top:86px;bottom:18px;left:16px;width:calc(100vw - 32px);padding:18px;border-radius:15px}.profile-panel-body{grid-template-columns:100px minmax(0,1fr);gap:16px;padding:18px 0 14px}.profile-panel-copy h2{font-size:23px;margin:8px 0 12px}.profile-panel-copy p{font-size:10px;line-height:1.65}.profile-panel-copy .profile-lead{font-size:11px}.profile-panel-stats strong{font-size:20px}.profile-panel-stats span{font-size:8px}.profile-competition-grid{grid-template-columns:1fr}.profile-competition-grid article{min-height:52px}.profile-panel-contact{margin-top:16px;padding-top:0}.profile-panel-contact a,.profile-panel-contact span{font-size:9px}}
+@media(max-width:430px){.profile-panel-body{grid-template-columns:82px minmax(0,1fr)}.profile-panel-copy h2{font-size:20px}.profile-panel-copy p:not(.profile-lead){display:none}.profile-panel-stats div{padding:11px 6px}.profile-competitions-head small{display:none}.profile-panel-contact{gap:8px 12px}}
 
 /* Apple-inspired editorial system for projects and collaboration */
 .works{padding:132px 0;background:#f5f5f7;color:#1d1d1f}
