@@ -94,6 +94,39 @@ const collaborations = [
   ['04', '作品分享', 'PORTFOLIO SHARING', '持续整理设计过程、图纸表达与作品集经验，也欢迎围绕建筑学习与创作展开内容合作。'],
 ]
 
+const commercialArchitectureProject = {
+  index: 'C01',
+  title: '旧址新序——鹤岭镇废弃铁路维修站活化改造设计',
+  subtitle: '建筑设计商单 / 工业遗产活化改造 / 完整方案展示',
+  year: '2026',
+  image: '/commercial-architecture-01/page-02.jpg',
+  gallery: [
+    { src: '/commercial-architecture-01/page-02.jpg', caption: '整体鸟瞰 · OVERALL AERIAL VIEW' },
+    { src: '/commercial-architecture-01/page-05.jpg', caption: '项目背景 · PROJECT BACKGROUND' },
+    { src: '/commercial-architecture-01/page-07.jpg', caption: '区位分析 · LOCATION ANALYSIS' },
+    { src: '/commercial-architecture-01/page-08.jpg', caption: '场地现状 · SITE CONDITIONS' },
+    { src: '/commercial-architecture-01/page-09.jpg', caption: '设计逻辑 · DESIGN LOGIC' },
+    { src: '/commercial-architecture-01/page-11.jpg', caption: '现状建筑分析 · EXISTING BUILDING ANALYSIS' },
+    { src: '/commercial-architecture-01/page-12.jpg', caption: '设计策略 · DESIGN STRATEGY' },
+    { src: '/commercial-architecture-01/page-14.jpg', caption: '总平面图 · SITE PLAN' },
+    { src: '/commercial-architecture-01/page-15.jpg', caption: '首层平面图 · FIRST FLOOR PLAN' },
+    { src: '/commercial-architecture-01/page-16.jpg', caption: '首层功能分析 · FIRST FLOOR PROGRAM' },
+    { src: '/commercial-architecture-01/page-17.jpg', caption: '二层平面图 · SECOND FLOOR PLAN' },
+    { src: '/commercial-architecture-01/page-18.jpg', caption: '二层功能分析 · SECOND FLOOR PROGRAM' },
+    { src: '/commercial-architecture-01/page-19.jpg', caption: '三层平面图 · THIRD FLOOR PLAN' },
+    { src: '/commercial-architecture-01/page-20.jpg', caption: '屋顶平面图 · ROOF PLAN' },
+    { src: '/commercial-architecture-01/page-21.jpg', caption: '建筑剖面一 · SECTION 01' },
+    { src: '/commercial-architecture-01/page-22.jpg', caption: '建筑剖面二 · SECTION 02' },
+    { src: '/commercial-architecture-01/page-23.jpg', caption: '建筑立面一 · ELEVATION 01' },
+    { src: '/commercial-architecture-01/page-24.jpg', caption: '建筑立面二 · ELEVATION 02' },
+    { src: '/commercial-architecture-01/page-26.jpg', caption: '方案鸟瞰 · PROPOSAL AERIAL VIEW' },
+    { src: '/commercial-architecture-01/page-27.jpg', caption: '入口透视 · ENTRANCE PERSPECTIVE' },
+    { src: '/commercial-architecture-01/page-28.jpg', caption: '连廊空间 · CORRIDOR SPACE' },
+    { src: '/commercial-architecture-01/page-29.jpg', caption: '庭院界面 · COURTYARD FRONTAGE' },
+    { src: '/commercial-architecture-01/page-30.jpg', caption: '建筑立面效果 · FACADE VIEW' },
+  ],
+}
+
 const competitionExperience = [
   { year: '2025', title: '全国第七届高等院校绿色建筑技能大赛', award: '一等奖' },
   { year: '2025', title: '湖南省大学生可持续建筑竞赛', award: '一等奖' },
@@ -435,7 +468,12 @@ function App() {
       <section className="strengths collaboration section shell" id="collaboration">
         <div className="section-heading collaboration-heading"><span>02 / COLLABORATION</span><div><h2>合作展示</h2><p>从建筑到表达，承接多尺度设计委托。</p></div></div>
         <div className="strength-grid">
-          {collaborations.map(([num, title, english, text]) => <article key={num}><span>{num} / {english}</span><h3>{title}</h3><p>{text}</p><a href="mailto:fqw19330235175@163.com" aria-label={`咨询${title}`}>合作咨询 <MoveRight size={18} /></a></article>)}
+          {collaborations.map(([num, title, english, text]) => (
+            <article key={num}>
+              <span>{num} / {english}</span><h3>{title}</h3><p>{text}</p>
+              <button type="button" className="collaboration-project-link" onClick={() => { if (num === '01') setActiveProject(commercialArchitectureProject) }} disabled={num !== '01'} aria-label={num === '01' ? `查看${title}商单项目` : `${title}项目内容待更新`}>查看项目 <MoveRight size={18} /></button>
+            </article>
+          ))}
         </div>
       </section>
 

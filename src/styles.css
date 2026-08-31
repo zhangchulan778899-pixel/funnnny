@@ -287,3 +287,10 @@
 .project-viewer-slide figcaption{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 4px;font-size:11px;font-weight:600;letter-spacing:.2px}
 .project-viewer-slide figcaption small{font-size:8px;font-weight:500;letter-spacing:1.1px;color:#86868b}
 @media(max-width:760px){.project-open-cue{right:12px;bottom:12px;opacity:1;transform:none;padding:8px 12px}.project-viewer-header{height:74px;grid-template-columns:auto 1fr auto;gap:10px;padding:0 14px}.project-viewer-close{width:40px;padding:0}.project-viewer-close span{display:none}.project-viewer-title{align-items:flex-start;text-align:left}.project-viewer-title strong{font-size:12px}.project-viewer-title small{display:none}.project-viewer-controls>span{display:none}.project-viewer-controls button{width:36px;height:36px}.project-viewer-controls button:first-of-type{display:none}.project-viewer-viewport{height:calc(100dvh - 74px)}.project-viewer-slide{padding:14px 14px 18px;gap:10px}.project-viewer-slide img{border-radius:16px}.project-viewer-slide figcaption{font-size:9px}.project-viewer-slide figcaption small{display:none}}
+
+/* Commercial project entry points */
+.collaboration-project-link{appearance:none;width:100%;display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding:22px 0 0;border:0;border-top:1px solid rgba(29,29,31,.1);background:transparent;color:#0071e3;font:600 12px/1.4 'DM Sans','Noto Sans SC',sans-serif;letter-spacing:1.2px;text-align:left}
+.collaboration-project-link svg{margin:0;transition:transform .25s ease}.collaboration-project-link:not(:disabled):hover svg{transform:translateX(5px)}
+.collaboration .strength-grid article:nth-child(3)>.collaboration-project-link,.collaboration .strength-grid article:hover>.collaboration-project-link{color:#2997ff;border-top-color:rgba(255,255,255,.18)}
+.collaboration-project-link:disabled{cursor:default}
+.collaboration-project-link:focus-visible{outline:2px solid currentColor;outline-offset:7px}
