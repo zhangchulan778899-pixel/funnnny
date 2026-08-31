@@ -127,6 +127,20 @@ const commercialArchitectureProject = {
   ],
 }
 
+const smallDesignProject = {
+  index: 'S01',
+  title: '光遇——建造节装置设计',
+  subtitle: '建造节装置 / 木构搭建 / 光影空间',
+  year: '—',
+  image: '/small-design-01/effect-01.jpg',
+  gallery: [
+    { src: '/small-design-01/effect-01.jpg', caption: '林下光影效果 · FOREST LIGHT VIEW 01' },
+    { src: '/small-design-01/effect-02.jpg', caption: '装置透视效果 · PAVILION PERSPECTIVE' },
+    { src: '/small-design-01/effect-03.jpg', caption: '装置正立面效果 · FRONT ELEVATION VIEW' },
+    { src: '/small-design-01/presentation-board.jpg', caption: '设计展板 · PRESENTATION BOARD' },
+  ],
+}
+
 const collaborationCollections = collaborations.map(([num, title, english, description]) => ({
   num,
   title,
@@ -141,6 +155,17 @@ const collaborationCollections = collaborations.map(([num, title, english, descr
         year: commercialArchitectureProject.year,
         image: commercialArchitectureProject.image,
         project: commercialArchitectureProject,
+      }
+    }
+
+    if (num === '02' && index === 0) {
+      return {
+        id: 'S01',
+        title: smallDesignProject.title,
+        subtitle: smallDesignProject.subtitle,
+        year: smallDesignProject.year,
+        image: smallDesignProject.image,
+        project: smallDesignProject,
       }
     }
 
