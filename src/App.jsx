@@ -85,6 +85,20 @@ const projects = [
       { src: '/project-05-gallery/guest-room.jpg', caption: '客房 · GUEST ROOM' },
     ],
   },
+  {
+    index: '06',
+    title: '浪·科技产业楼设计',
+    subtitle: '科技产业建筑 / 产业园区 / 公共空间',
+    year: '2026',
+    image: '/project-06-gallery/aerial.jpg',
+    logo: '/project-logo-06.png',
+    gallery: [
+      { src: '/project-06-gallery/aerial.jpg', caption: '整体鸟瞰 · OVERALL AERIAL VIEW' },
+      { src: '/project-06-gallery/plaza.jpg', caption: '入口广场 · ENTRANCE PLAZA' },
+      { src: '/project-06-gallery/floating-corridor.jpg', caption: '悬浮廊道 · FLOATING CORRIDOR' },
+      { src: '/project-06-gallery/rear-view.jpg', caption: '建筑背面 · REAR VIEW' },
+    ],
+  },
 ]
 
 const collaborations = [
