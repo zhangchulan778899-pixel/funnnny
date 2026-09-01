@@ -333,3 +333,9 @@
 .works .project-copy p{margin:0;font-size:11px;line-height:1.65;text-align:left;white-space:normal;color:#6e6e73}
 @media(max-width:900px){.works .project-list{grid-template-columns:1fr;gap:66px}.works .project-rail h3{font-size:19px}}
 @media(max-width:560px){.works .project-list{gap:52px}.works .project-identity{grid-template-columns:70px minmax(0,1fr);column-gap:13px}.works .project-logo{width:70px;height:52px}.works .project-rail{gap:12px;padding-top:15px}.works .project-rail h3{font-size:16px}.works .project-copy{margin-left:83px;padding-top:7px}.works .project-copy p{font-size:10px}.works .project-open-cue{opacity:1;transform:none}}
+
+/* Inverted, enlarged architecture project logos */
+.works .project-identity{grid-template-columns:104px minmax(0,1fr);column-gap:17px}
+.works .project-logo{width:104px;height:60px;padding:0;background:#fff;filter:invert(1) grayscale(1) contrast(1.12);object-fit:contain}
+.works .project-copy{margin-left:121px}
+@media(max-width:560px){.works .project-identity{grid-template-columns:82px minmax(0,1fr);column-gap:13px}.works .project-logo{width:82px;height:52px}.works .project-copy{margin-left:95px}}
