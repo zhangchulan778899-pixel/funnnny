@@ -336,6 +336,7 @@
 
 /* Inverted, enlarged architecture project logos */
 .works .project-identity{grid-template-columns:104px minmax(0,1fr);column-gap:17px}
-.works .project-logo{width:104px;height:60px;padding:0;background:#fff;filter:invert(1) grayscale(1) contrast(1.12);object-fit:contain}
+.works .project-logo{width:104px;height:60px;padding:0;background:#fff;filter:invert(1) grayscale(1) contrast(1.12);object-fit:contain;pointer-events:none;user-select:none;transition:none;transform:none;will-change:auto}
+.works .project-identity:hover .project-logo,.works .project-logo:focus-visible{transform:none}
 .works .project-copy{margin-left:121px}
 @media(max-width:560px){.works .project-identity{grid-template-columns:82px minmax(0,1fr);column-gap:13px}.works .project-logo{width:82px;height:52px}.works .project-copy{margin-left:95px}}
