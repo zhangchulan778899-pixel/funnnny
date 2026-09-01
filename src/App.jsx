@@ -8,7 +8,7 @@ const projects = [
     title: '画院庭生·隆回滩头传统民居改造',
     subtitle: '第七届全国绿建一等奖',
     year: '2025',
-    image: '/project-01.png',
+    image: '/project-01.webp',
     logo: '/project-logo-01.png',
     gallery: [
       { src: '/project-01-gallery/aerial.jpg', caption: '整体鸟瞰 · OVERALL AERIAL VIEW' },
@@ -24,7 +24,7 @@ const projects = [
     title: '第二地面上·挂咀州老船厂改造',
     subtitle: '湖南省可持续一等奖',
     year: '2025',
-    image: '/project-02.png',
+    image: '/project-02.webp',
     logo: '/project-logo-02.png',
     gallery: [
       { src: '/project-02-gallery/autumn-aerial.jpg', caption: '秋季鸟瞰 · AUTUMN AERIAL VIEW' },
@@ -40,7 +40,7 @@ const projects = [
     title: '延景·融生—青少年活动中心设计',
     subtitle: '城市设计 / 青少年公共活动空间',
     year: '2024',
-    image: '/project-03.png',
+    image: '/project-03.webp',
     logo: '/project-logo-03.png',
     gallery: [
       { src: '/project-03-gallery/autumn-aerial.jpg', caption: '秋季鸟瞰 · AUTUMN AERIAL VIEW' },
@@ -235,6 +235,28 @@ const competitionExperience = [
 
 const contactMessage = '很高兴你来到这里。告诉我你的场地、想法与时间，我们从一封邮件开始。'
 
+function DeferredImage({ src, alt, className, rootMargin = '600px 0px', ...props }) {
+  const imageRef = useRef(null)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const image = imageRef.current
+    if (!image || !('IntersectionObserver' in window)) {
+      setReady(true)
+      return undefined
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      setReady(true)
+      observer.disconnect()
+    }, { rootMargin })
+    observer.observe(image)
+    return () => observer.disconnect()
+  }, [rootMargin, src])
+
+  return <img ref={imageRef} className={className} src={ready ? src : undefined} data-src={ready ? undefined : src} alt={alt} decoding="async" {...props} />
+}
+
 function useTypewriter(text, speed = 38, startDelay = 600) {
   const [displayed, setDisplayed] = useState('')
 
@@ -259,17 +281,42 @@ function useTypewriter(text, speed = 38, startDelay = 600) {
 }
 
 function ContactSection() {
+  const contactRef = useRef(null)
   const videoRef = useRef(null)
   const prevXRef = useRef(null)
+  const pendingXRef = useRef(null)
+  const moveFrameRef = useRef(null)
   const targetTimeRef = useRef(0)
   const seekingRef = useRef(false)
   const [actionsVisible, setActionsVisible] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [videoActive, setVideoActive] = useState(false)
   const { displayed, done } = useTypewriter(contactMessage)
 
   useEffect(() => {
     const timer = window.setTimeout(() => setActionsVisible(true), 400)
     return () => window.clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    const contact = contactRef.current
+    if (!contact || !('IntersectionObserver' in window)) {
+      setVideoActive(true)
+      return undefined
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      setVideoActive(true)
+      observer.disconnect()
+    }, { rootMargin: '600px 0px' })
+    observer.observe(contact)
+    return () => {
+      observer.disconnect()
+      if (moveFrameRef.current !== null) {
+        window.cancelAnimationFrame(moveFrameRef.current)
+        moveFrameRef.current = null
+      }
+    }
   }, [])
 
   const seekToTarget = () => {
@@ -281,17 +328,23 @@ function ContactSection() {
   }
 
   const handleMouseMove = (event) => {
-    const video = videoRef.current
-    if (!video || !Number.isFinite(video.duration)) return
-    if (prevXRef.current === null) {
-      prevXRef.current = event.clientX
-      return
-    }
-    const delta = event.clientX - prevXRef.current
-    prevXRef.current = event.clientX
-    const nextTime = targetTimeRef.current + (delta / window.innerWidth) * 0.8 * video.duration
-    targetTimeRef.current = Math.min(video.duration, Math.max(0, nextTime))
-    seekToTarget()
+    pendingXRef.current = event.clientX
+    if (moveFrameRef.current !== null) return
+    moveFrameRef.current = window.requestAnimationFrame(() => {
+      moveFrameRef.current = null
+      const video = videoRef.current
+      const pointerX = pendingXRef.current
+      if (!video || !Number.isFinite(video.duration) || pointerX === null) return
+      if (prevXRef.current === null) {
+        prevXRef.current = pointerX
+        return
+      }
+      const delta = pointerX - prevXRef.current
+      prevXRef.current = pointerX
+      const nextTime = targetTimeRef.current + (delta / window.innerWidth) * 0.8 * video.duration
+      targetTimeRef.current = Math.min(video.duration, Math.max(0, nextTime))
+      seekToTarget()
+    })
   }
 
   const handleSeeked = () => {
@@ -306,8 +359,8 @@ function ContactSection() {
   }
 
   return (
-    <footer className="contact" id="contact" onMouseMove={handleMouseMove} onMouseLeave={() => { prevXRef.current = null }}>
-      <video ref={videoRef} className="contact-video" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260530_042513_df96a13b-6155-4f6e-8b93-c9dee66fba08.mp4" muted playsInline preload="auto" onLoadedMetadata={() => { targetTimeRef.current = 0 }} onSeeked={handleSeeked} />
+    <footer ref={contactRef} className="contact" id="contact" onMouseMove={handleMouseMove} onMouseLeave={() => { prevXRef.current = null }}>
+      <video ref={videoRef} className="contact-video" src={videoActive ? 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260530_042513_df96a13b-6155-4f6e-8b93-c9dee66fba08.mp4' : undefined} muted playsInline preload="metadata" onLoadedMetadata={() => { targetTimeRef.current = 0 }} onSeeked={handleSeeked} />
       <div className="contact-wash" />
       <div className="contact-top shell"><span>FUNNNNNY STUDIO</span><span>OPEN FOR COLLABORATION · 2026</span></div>
       <div className="contact-stage shell">
@@ -328,6 +381,7 @@ function ContactSection() {
 function ProjectViewer({ project, onClose }) {
   const viewportRef = useRef(null)
   const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0 })
+  const scrollFrameRef = useRef(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const gallery = project.gallery || [{ src: project.image, caption: '项目主效果图 · PROJECT VIEW' }]
 
@@ -350,12 +404,20 @@ function ProjectViewer({ project, onClose }) {
     return () => {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', handleKeyDown)
+      if (scrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(scrollFrameRef.current)
+        scrollFrameRef.current = null
+      }
     }
   }, [currentIndex, onClose])
 
   const handleScroll = (event) => {
     const viewport = event.currentTarget
-    setCurrentIndex(Math.round(viewport.scrollLeft / viewport.clientWidth))
+    if (scrollFrameRef.current !== null) return
+    scrollFrameRef.current = window.requestAnimationFrame(() => {
+      scrollFrameRef.current = null
+      setCurrentIndex(Math.round(viewport.scrollLeft / viewport.clientWidth))
+    })
   }
 
   const startDrag = (event) => {
@@ -391,7 +453,7 @@ function ProjectViewer({ project, onClose }) {
       <div className="project-viewer-viewport" ref={viewportRef} onScroll={handleScroll} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
         {gallery.map((item, index) => (
           <figure className="project-viewer-slide" key={item.src}>
-            <img src={item.src} alt={`${project.title}—${item.caption}`} loading={index === 0 ? 'eager' : 'lazy'} draggable="false" />
+            <img src={item.src} alt={`${project.title}—${item.caption}`} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" fetchPriority={index === 0 ? 'high' : 'low'} draggable="false" />
             <figcaption><span>{item.caption}</span><small>拖动或滑动浏览 · DRAG / SWIPE</small></figcaption>
           </figure>
         ))}
@@ -425,7 +487,7 @@ function CollaborationCollection({ collection, onClose, onOpenProject }) {
           <article className={`collection-card ${item.project ? 'is-available' : 'is-placeholder'}`} key={item.id}>
             {item.project ? (
               <button type="button" className="collection-card-image" onClick={() => onOpenProject(item.project)} aria-label={`查看${item.title}项目详情`}>
-                <img src={item.image} alt={item.title} />
+                <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
                 <span>查看详情 <MoveRight size={17} /></span>
               </button>
             ) : (
@@ -448,6 +510,7 @@ function CollaborationCollection({ collection, onClose, onOpenProject }) {
 }
 
 function App() {
+  const navFrameRef = useRef(null)
   const [navScrolled, setNavScrolled] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
   const [pricingOpen, setPricingOpen] = useState(false)
@@ -455,13 +518,23 @@ function App() {
   const [activeCollection, setActiveCollection] = useState(null)
 
   useEffect(() => {
-    const updateNav = () => setNavScrolled(window.scrollY >= window.innerHeight - 160)
+    const updateNav = () => {
+      if (navFrameRef.current !== null) return
+      navFrameRef.current = window.requestAnimationFrame(() => {
+        navFrameRef.current = null
+        setNavScrolled(window.scrollY >= window.innerHeight - 160)
+      })
+    }
     updateNav()
     window.addEventListener('scroll', updateNav, { passive: true })
     window.addEventListener('resize', updateNav)
     return () => {
       window.removeEventListener('scroll', updateNav)
       window.removeEventListener('resize', updateNav)
+      if (navFrameRef.current !== null) {
+        window.cancelAnimationFrame(navFrameRef.current)
+        navFrameRef.current = null
+      }
     }
   }, [])
 
@@ -480,7 +553,7 @@ function App() {
   return (
     <main>
       <section className="hero" id="home">
-        <img className="hero-video" src="/hero-v2.png" alt="黑白建筑柱廊与光影构成" />
+        <img className="hero-video" src="/hero-v2.webp" alt="黑白建筑柱廊与光影构成" decoding="async" fetchPriority="high" />
         <div className="hero-shade" />
         <header className={`nav shell ${navScrolled ? 'is-scrolled' : ''}`}>
           <a className="brand" href="#home" aria-label="FUNNNNNY STUDIO 返回首页">
@@ -500,7 +573,7 @@ function App() {
         <aside className={`profile-panel ${profileOpen ? 'is-open' : ''}`} id="profile-panel" role="dialog" aria-label="个人介绍" aria-hidden={!profileOpen}>
           <div className="profile-panel-head"><span>PROFILE / 范钦威</span><button type="button" onClick={() => setProfileOpen(false)} aria-label="关闭个人介绍">×</button></div>
           <div className="profile-panel-body">
-            <div className="profile-panel-portrait"><img src="/portrait.jpg" alt="范钦威个人肖像" /></div>
+            <div className="profile-panel-portrait"><img src={profileOpen ? '/portrait.jpg' : undefined} alt="范钦威个人肖像" decoding="async" /></div>
             <div className="profile-panel-copy">
               <span>ARCHITECT / QINWEI FAN</span>
               <h2>设计始于观察，<br />成于克制。</h2>
@@ -596,9 +669,9 @@ function App() {
         <div className="project-list shell">
           {projects.map((project) => (
             <article className="project" key={project.index}>
-              <div className="project-rail"><div className="project-identity"><strong>{project.index}</strong><img className="project-logo" src={project.logo} alt={`${project.title}项目图标`} /><h3>{project.title}</h3></div><time>{project.year}</time></div>
+              <div className="project-rail"><div className="project-identity"><strong>{project.index}</strong><DeferredImage className="project-logo" src={project.logo} alt={`${project.title}项目图标`} /><h3>{project.title}</h3></div><time>{project.year}</time></div>
               <div className="project-main">
-                <button type="button" className="project-image" onClick={() => setActiveProject(project)} aria-label={`查看${project.title}项目详情`}><img src={project.image} alt={project.title} /><span className="project-open-cue">查看项目 <MoveRight size={17} /></span></button>
+                <button type="button" className="project-image" onClick={() => setActiveProject(project)} aria-label={`查看${project.title}项目详情`}><DeferredImage src={project.image} alt={project.title} /><span className="project-open-cue">查看项目 <MoveRight size={17} /></span></button>
                 <div className="project-copy"><p>{project.subtitle}</p></div>
               </div>
             </article>

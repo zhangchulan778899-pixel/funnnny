@@ -350,3 +350,4 @@
 .collaboration .strength-grid article.collaboration-card h3{margin:54px 0 18px}
 .collaboration .strength-grid article.collaboration-card p{color:#6e6e73}
 @media(max-width:760px){.collaboration .strength-grid>.collaboration-glow{min-height:310px;border-radius:22px!important}.collaboration .strength-grid article.collaboration-card{min-height:310px;padding:28px}.collaboration .strength-grid article.collaboration-card h3{margin-top:48px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
