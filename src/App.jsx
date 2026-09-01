@@ -156,6 +156,23 @@ const smallDesignProject = {
   ],
 }
 
+const smallDesignProject02 = {
+  index: 'S02',
+  title: '“乡愁”图书馆',
+  subtitle: '水岸图书馆 / 月亮意象 / 沉浸式光影空间',
+  year: '—',
+  image: '/small-design-02/water-reflection.jpg',
+  gallery: [
+    { src: '/small-design-02/skylight.jpg', caption: '采光天窗 · DAYLIGHT SKYLIGHT' },
+    { src: '/small-design-02/riverside-dialogue.jpg', caption: '隔江对话 · DIALOGUE ACROSS THE RIVER' },
+    { src: '/small-design-02/geometric-form.jpg', caption: '几何造型 · GEOMETRIC FORM' },
+    { src: '/small-design-02/spatial-section.jpg', caption: '空间剖面 · SPATIAL SECTION' },
+    { src: '/small-design-02/water-reflection.jpg', caption: '水面倒影 · WATER REFLECTION' },
+    { src: '/small-design-02/nostalgia.jpg', caption: '乡愁意境 · NOSTALGIA VIEW' },
+    { src: '/small-design-02/moon-concept.jpg', caption: '月亮意象 · MOON CONCEPT' },
+  ],
+}
+
 const collaborationCollections = collaborations.map(([num, title, english, description]) => ({
   num,
   title,
@@ -181,6 +198,17 @@ const collaborationCollections = collaborations.map(([num, title, english, descr
         year: smallDesignProject.year,
         image: smallDesignProject.image,
         project: smallDesignProject,
+      }
+    }
+
+    if (num === '02' && index === 1) {
+      return {
+        id: 'S02',
+        title: smallDesignProject02.title,
+        subtitle: smallDesignProject02.subtitle,
+        year: smallDesignProject02.year,
+        image: smallDesignProject02.image,
+        project: smallDesignProject02,
       }
     }
 
