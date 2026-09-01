@@ -590,7 +590,7 @@ function App() {
               className={`collaboration-glow collaboration-glow--${index + 1}`}
               edgeSensitivity={26}
               glowColor="210 94 63"
-              backgroundColor={['#f5f5f7', '#edf4fb', '#1d1d1f', '#eeeef0'][index]}
+              backgroundColor="#eeeef0"
               borderRadius={28}
               glowRadius={34}
               glowIntensity={0.9}
@@ -598,7 +598,7 @@ function App() {
               fillOpacity={0.16}
               colors={['#55c2ff', '#7c8cff', '#be78ff']}
             >
-              <article className={`collaboration-card${index === 2 ? ' collaboration-card--dark' : ''}`}>
+              <article className="collaboration-card">
                 <span>{num} / {english}</span><h3>{title}</h3><p>{text}</p>
                 <button type="button" className="collaboration-project-link" onClick={() => setActiveCollection(collaborationCollections.find((collection) => collection.num === num))} aria-label={`查看${title}项目列表`}>查看项目 <MoveRight size={18} /></button>
               </article>
