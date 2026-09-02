@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Mail, Phone, MapPin, MoveRight, ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { Mail, Phone, MapPin, MoveRight, X } from 'lucide-react'
 import BorderGlow from './components/BorderGlow'
 
 const projects = [
@@ -414,6 +414,9 @@ function ProjectViewer({ project, onClose }) {
   const viewportRef = useRef(null)
   const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0 })
   const scrollFrameRef = useRef(null)
+  const currentIndexRef = useRef(0)
+  const wheelLockRef = useRef(false)
+  const wheelResetRef = useRef(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const gallery = project.gallery || [{ src: project.image, caption: '项目主效果图 · PROJECT VIEW' }]
 
@@ -421,8 +424,40 @@ function ProjectViewer({ project, onClose }) {
     const boundedIndex = Math.max(0, Math.min(gallery.length - 1, nextIndex))
     const viewport = viewportRef.current
     if (viewport) viewport.scrollTo({ left: viewport.clientWidth * boundedIndex, behavior: 'smooth' })
+    currentIndexRef.current = boundedIndex
     setCurrentIndex(boundedIndex)
   }
+
+  useEffect(() => {
+    const viewport = viewportRef.current
+    if (!viewport) return undefined
+
+    const handleWheel = (event) => {
+      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX
+      if (Math.abs(delta) < 8) return
+      event.preventDefault()
+      if (wheelLockRef.current) return
+
+      const nextIndex = currentIndexRef.current + (delta > 0 ? 1 : -1)
+      const boundedIndex = Math.max(0, Math.min(gallery.length - 1, nextIndex))
+      if (boundedIndex === currentIndexRef.current) return
+
+      wheelLockRef.current = true
+      goTo(boundedIndex)
+      wheelResetRef.current = window.setTimeout(() => {
+        wheelLockRef.current = false
+        wheelResetRef.current = null
+      }, 480)
+    }
+
+    viewport.addEventListener('wheel', handleWheel, { passive: false })
+    return () => {
+      viewport.removeEventListener('wheel', handleWheel)
+      if (wheelResetRef.current !== null) window.clearTimeout(wheelResetRef.current)
+      wheelResetRef.current = null
+      wheelLockRef.current = false
+    }
+  }, [gallery.length])
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
@@ -448,7 +483,9 @@ function ProjectViewer({ project, onClose }) {
     if (scrollFrameRef.current !== null) return
     scrollFrameRef.current = window.requestAnimationFrame(() => {
       scrollFrameRef.current = null
-      setCurrentIndex(Math.round(viewport.scrollLeft / viewport.clientWidth))
+      const nextIndex = Math.round(viewport.scrollLeft / viewport.clientWidth)
+      currentIndexRef.current = nextIndex
+      setCurrentIndex(nextIndex)
     })
   }
 
@@ -478,15 +515,14 @@ function ProjectViewer({ project, onClose }) {
         <div className="project-viewer-title"><span>{project.index} / {project.year}</span><strong>{project.title}</strong><small>{project.subtitle}</small></div>
         <div className="project-viewer-controls">
           <span>{String(currentIndex + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}</span>
-          <button type="button" onClick={() => goTo(currentIndex - 1)} disabled={currentIndex === 0} aria-label="上一张效果图"><ChevronLeft size={20} /></button>
-          <button type="button" onClick={() => goTo(currentIndex + 1)} disabled={currentIndex === gallery.length - 1} aria-label="下一张效果图"><ChevronRight size={20} /></button>
+          <small>滚轮翻页 · SCROLL</small>
         </div>
       </header>
       <div className="project-viewer-viewport" ref={viewportRef} onScroll={handleScroll} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
         {gallery.map((item, index) => (
           <figure className="project-viewer-slide" key={item.src}>
             <img src={item.src} alt={`${project.title}—${item.caption}`} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" fetchPriority={index === 0 ? 'high' : 'low'} draggable="false" />
-            <figcaption><span>{item.caption}</span><small>拖动或滑动浏览 · DRAG / SWIPE</small></figcaption>
+            <figcaption><span>{item.caption}</span><small>滚轮 / 拖动 / 滑动浏览 · SCROLL / DRAG / SWIPE</small></figcaption>
           </figure>
         ))}
       </div>
