@@ -21,6 +21,9 @@
 @media(max-width:430px){.nav-actions .nav-portfolio-mobile{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.portfolio-dialog[open]{animation:none}}
 .portfolio-book-frame{display:block;width:100%;height:100%;min-width:0;min-height:0;flex:1;border:0;background:transparent}
+.portfolio-book-frame[data-ready=false]{visibility:hidden;pointer-events:none}
+.portfolio-book-status{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center;color:#4c585b;font-size:14px}
+.portfolio-book-status button{border:1px solid rgba(50,60,60,.25);border-radius:24px;padding:10px 20px;background:rgba(255,255,255,.45);color:#22272a;cursor:pointer;font:inherit}
 @media(max-width:1000px){.nav-actions .nav-portfolio-mobile{display:block;appearance:none;border:0;padding:0;background:none;color:inherit;font-family:'Noto Serif SC',serif;font-size:12px}}
 @media(max-width:680px){.nav-actions .nav-portfolio-mobile{font-size:10px}.portfolio-dialog{inset:12dvh 0 auto;width:92vw;height:80dvh;border-radius:20px}.portfolio-dialog-header{padding:17px 20px}.portfolio-dialog-header h2{font-size:18px}}
 @media(max-width:430px){.nav-actions .nav-portfolio-mobile{font-size:9px}}

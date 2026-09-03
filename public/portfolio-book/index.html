@@ -78,5 +78,27 @@ html, body { height: 100%; background: transparent; }
 </main>
 <script src="vendor/page-flip.browser.js"></script>
 <script src="flipbook.js"></script>
+<script>
+// Embedded-view handshake; the standalone book and its turn engine remain unchanged.
+(() => {
+  if (window.parent === window) return;
+  let status = 'loading';
+  const notify = (type) => window.parent.postMessage({ channel: 'portfolio-book', type }, window.location.origin);
+  window.addEventListener('message', (event) => {
+    if (event.source !== window.parent || event.origin !== window.location.origin) return;
+    if (event.data?.channel === 'portfolio-book' && event.data.type === 'probe' && status !== 'loading') notify(status);
+  });
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') { event.preventDefault(); notify('close'); }
+  });
+  const report = (type) => { status = type; notify(type); };
+  try {
+    if (pageFlip.getPageCount() !== document.querySelectorAll('.book-page').length) throw new Error('Book initialization incomplete');
+    document.querySelector('.book-page img').decode().then(() => report('ready'), () => report('error'));
+  } catch {
+    report('error');
+  }
+})();
+</script>
 </body>
 </html>
