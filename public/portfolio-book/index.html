@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>范钦威 · 建筑作品集</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+:root { background: transparent; --page-width: 400; --page-height: 283; font-family: Arial, "Microsoft YaHei", sans-serif; }
+html, body { height: 100%; background: transparent; }
+.room { height: 100dvh; min-height: 0; padding: 12px 16px; grid-template-rows: 20px minmax(0,1fr) 44px; gap: 8px; }
+.book-header { grid-template-columns: 1fr auto; }
+.book-header span { color: #4c585b; font-size: 9px; letter-spacing: .12em; }
+.stage { padding: 0; }
+.stage::after { display: none; }
+.book-rig { width: min(100%, calc((100dvh - 104px) * 2.8268551237)); height: calc(100dvh - 104px); }
+.book-page, .cover, .back-cover { background: #fff; padding: 0; }
+.book-page::after { content: none; }
+.book-page img { display: block; width: 100%; height: 100%; object-fit: contain; user-select: none; }
+.book { filter: drop-shadow(0 8px 12px rgb(20 25 25 / 18%)); }
+.controls { max-width: 480px; gap: 12px; }
+.controls button { height: 40px; background: rgb(255 255 255 / 35%); }
+.controls button:focus-visible { outline: 2px solid #0071e3; outline-offset: 2px; }
+.status small { font-family: Arial, "Microsoft YaHei", sans-serif; color: #4c585b; }
+@media (max-width: 600px) {
+ .room { padding: 10px; }
+ .book-header span:first-child { display: inline; }
+ .book-rig { width: min(100%, calc((100dvh - 104px) * 1.4134275618)); }
+ .status small { font-size: 9px; }
+}
+</style>
+</head>
+<body>
+<main class="room">
+<header class="book-header"><span>33 页 · 原版作品集</span><span id="orientation">Open spread</span></header>
+<section class="stage" aria-label="建筑作品集翻页画册">
+<div class="book-rig"><div id="book" class="book" data-page-width="400" data-page-height="283">
+<article class="book-page cover" data-density="hard" aria-label="作品集第 1 页"><img src="assets/photos/page-001.webp" alt="建筑作品集原版第 1 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 2 页"><img src="assets/photos/page-002.webp" alt="建筑作品集原版第 2 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 3 页"><img src="assets/photos/page-003.webp" alt="建筑作品集原版第 3 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 4 页"><img src="assets/photos/page-004.webp" alt="建筑作品集原版第 4 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 5 页"><img src="assets/photos/page-005.webp" alt="建筑作品集原版第 5 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 6 页"><img src="assets/photos/page-006.webp" alt="建筑作品集原版第 6 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 7 页"><img src="assets/photos/page-007.webp" alt="建筑作品集原版第 7 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 8 页"><img src="assets/photos/page-008.webp" alt="建筑作品集原版第 8 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 9 页"><img src="assets/photos/page-009.webp" alt="建筑作品集原版第 9 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 10 页"><img src="assets/photos/page-010.webp" alt="建筑作品集原版第 10 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 11 页"><img src="assets/photos/page-011.webp" alt="建筑作品集原版第 11 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 12 页"><img src="assets/photos/page-012.webp" alt="建筑作品集原版第 12 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 13 页"><img src="assets/photos/page-013.webp" alt="建筑作品集原版第 13 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 14 页"><img src="assets/photos/page-014.webp" alt="建筑作品集原版第 14 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 15 页"><img src="assets/photos/page-015.webp" alt="建筑作品集原版第 15 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 16 页"><img src="assets/photos/page-016.webp" alt="建筑作品集原版第 16 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 17 页"><img src="assets/photos/page-017.webp" alt="建筑作品集原版第 17 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 18 页"><img src="assets/photos/page-018.webp" alt="建筑作品集原版第 18 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 19 页"><img src="assets/photos/page-019.webp" alt="建筑作品集原版第 19 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 20 页"><img src="assets/photos/page-020.webp" alt="建筑作品集原版第 20 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 21 页"><img src="assets/photos/page-021.webp" alt="建筑作品集原版第 21 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 22 页"><img src="assets/photos/page-022.webp" alt="建筑作品集原版第 22 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 23 页"><img src="assets/photos/page-023.webp" alt="建筑作品集原版第 23 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 24 页"><img src="assets/photos/page-024.webp" alt="建筑作品集原版第 24 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 25 页"><img src="assets/photos/page-025.webp" alt="建筑作品集原版第 25 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 26 页"><img src="assets/photos/page-026.webp" alt="建筑作品集原版第 26 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 27 页"><img src="assets/photos/page-027.webp" alt="建筑作品集原版第 27 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 28 页"><img src="assets/photos/page-028.webp" alt="建筑作品集原版第 28 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 29 页"><img src="assets/photos/page-029.webp" alt="建筑作品集原版第 29 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 30 页"><img src="assets/photos/page-030.webp" alt="建筑作品集原版第 30 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 31 页"><img src="assets/photos/page-031.webp" alt="建筑作品集原版第 31 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 32 页"><img src="assets/photos/page-032.webp" alt="建筑作品集原版第 32 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page" aria-label="作品集第 33 页"><img src="assets/photos/page-033.webp" alt="建筑作品集原版第 33 页" width="1600" height="1132" decoding="async" draggable="false"></article>
+<article class="book-page back-cover" data-density="hard" aria-label="空白封底"></article>
+</div></div>
+</section>
+<footer class="controls" aria-label="翻页操作">
+<button id="previous" type="button" aria-label="上一页">&larr;</button>
+<div class="status" aria-live="polite"><span id="page-status">Cover</span><small>拖动页角 / 点击箭头 / 触摸滑动 / 键盘左右键</small></div>
+<button id="next" type="button" aria-label="下一页">&rarr;</button>
+</footer>
+</main>
+<script src="vendor/page-flip.browser.js"></script>
+<script src="flipbook.js"></script>
+</body>
+</html>
