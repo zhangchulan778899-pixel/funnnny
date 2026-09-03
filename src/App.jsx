@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Mail, Phone, MapPin, MoveRight, X } from 'lucide-react'
 import BorderGlow from './components/BorderGlow'
+import PortfolioDialog from './components/PortfolioDialog'
 
 const projects = [
   {
@@ -584,6 +585,15 @@ function App() {
   const [pricingOpen, setPricingOpen] = useState(false)
   const [activeProject, setActiveProject] = useState(null)
   const [activeCollection, setActiveCollection] = useState(null)
+  const [portfolioOpen, setPortfolioOpen] = useState(false)
+
+  const openPortfolio = () => {
+    setProfileOpen(false)
+    setPricingOpen(false)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+    window.history.replaceState(null, '', '#home')
+    setPortfolioOpen(true)
+  }
 
   useEffect(() => {
     const updateNav = () => {
@@ -632,8 +642,10 @@ function App() {
             <a href="#works"><strong>作品</strong><small>WORKS</small></a>
             <a href="#collaboration"><strong>合作</strong><small>COLLABORATION</small></a>
             <a href="#contact"><strong>联系</strong><small>CONTACT</small></a>
+            <button type="button" className="nav-portfolio" onClick={openPortfolio} aria-haspopup="dialog" aria-expanded={portfolioOpen} aria-controls="portfolio-dialog"><strong>作品集</strong><small>PORTFOLIO</small></button>
           </nav>
           <div className="nav-actions">
+            <button type="button" className="nav-portfolio-mobile" onClick={openPortfolio} aria-haspopup="dialog" aria-expanded={portfolioOpen} aria-controls="portfolio-dialog">作品集</button>
             <button type="button" className="nav-pricing" onClick={() => { setPricingOpen((open) => !open); setProfileOpen(false) }} aria-expanded={pricingOpen} aria-controls="pricing-panel"><span className="pricing-dot" aria-hidden="true" />明细 <small>PRICING</small></button>
             <button type="button" className="nav-contact" onClick={() => { setProfileOpen((open) => !open); setPricingOpen(false) }} aria-expanded={profileOpen} aria-controls="profile-panel"><span className="person-dot" />个人介绍 <small>ABOUT</small></button>
           </div>
@@ -777,6 +789,7 @@ function App() {
       </section>
 
       <ContactSection />
+      {portfolioOpen && <PortfolioDialog onClose={() => setPortfolioOpen(false)} />}
     </main>
   )
 }
