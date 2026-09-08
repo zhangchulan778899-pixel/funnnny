@@ -109,20 +109,23 @@ const collaborations = [
   ['04', '作品分享', 'PORTFOLIO SHARING', '持续整理设计过程、图纸表达与作品集经验，也欢迎围绕建筑学习与创作展开内容合作。'],
 ]
 
-const collaborationCovers = [
-  { src: '/project-02-nanyuan/cover.webp', label: '湖南工程学院南苑改造' },
-  { src: '/small-design-01/effect-01.jpg', label: '光遇——建造节装置设计' },
-  {
-    src: '/collaboration-placeholders/rapid-design.jpg',
-    label: '苏州金鸡湖公共空间（临时示意）',
-    source: 'https://www.gooood.cn/jinji-lake-landscape-design-by-aecom.htm',
-  },
-  {
-    src: '/collaboration-placeholders/portfolio-sharing.jpg',
-    label: '上海经浦园（临时示意）',
-    source: 'https://www.gooood.cn/jingpu-garden-by-original-design-studio.htm',
-  },
+const collaborationPlaceholderCovers = [
+  '/collaboration-placeholders/placeholder-01.jpg',
+  '/collaboration-placeholders/placeholder-02.jpg',
+  '/collaboration-placeholders/placeholder-03.jpg',
+  '/collaboration-placeholders/placeholder-04.jpg',
+  '/collaboration-placeholders/placeholder-05.jpg',
+  '/collaboration-placeholders/placeholder-06.jpg',
+  '/collaboration-placeholders/placeholder-07.jpg',
+  '/collaboration-placeholders/placeholder-08.jpg',
+  '/collaboration-placeholders/placeholder-09.jpg',
+  '/collaboration-placeholders/placeholder-10.jpg',
+  '/collaboration-placeholders/rapid-design.jpg',
+  '/collaboration-placeholders/portfolio-sharing.jpg',
 ]
+
+const collaborationPlaceholderStarts = { '01': 0, '02': 2, '03': 4, '04': 8 }
+const goooodCategorySource = 'https://www.gooood.cn/category/type/architecture'
 
 const commercialArchitectureProject = {
   index: 'C01',
@@ -260,11 +263,15 @@ const collaborationCollections = collaborations.map(([num, title, english, descr
     }
 
     const projectNumber = String(index + 1).padStart(2, '0')
+    const completedProjects = num === '01' || num === '02' ? 2 : 0
+    const placeholderIndex = collaborationPlaceholderStarts[num] + index - completedProjects
     return {
       id: `${num}.${projectNumber}`,
       title: `${title}项目 ${projectNumber}`,
       subtitle: 'PROJECT FRAMEWORK / 内容待补充',
       year: '—',
+      image: collaborationPlaceholderCovers[placeholderIndex],
+      source: goooodCategorySource,
     }
   }),
 }))
@@ -778,22 +785,34 @@ function App() {
 
       <section className="strengths collaboration section shell" id="collaboration">
         <div className="section-heading collaboration-heading"><span>02 / COLLABORATION</span><div><h2>合作展示</h2><p>从建筑到表达，承接多尺度设计委托。</p></div></div>
-        <div className="collaboration-project-grid">
-          {collaborations.map(([num, title, english, text], index) => (
-            <article className="collaboration-project-tile" key={num}>
-              <button type="button" className="collaboration-project-cover" onClick={() => setActiveCollection(collaborationCollections.find((collection) => collection.num === num))} aria-label={`查看${title}项目列表`}>
-                <DeferredImage src={collaborationCovers[index].src} alt={collaborationCovers[index].label} />
-                <span>查看项目 <MoveRight size={15} /></span>
-              </button>
-              <div className="collaboration-project-caption">
-                <button type="button" onClick={() => setActiveCollection(collaborationCollections.find((collection) => collection.num === num))}>
-                  <span>{num} /</span> {title}
-                </button>
-                <small>{english}</small>
-                {collaborationCovers[index].source && <a href={collaborationCovers[index].source} target="_blank" rel="noreferrer">临时示意图 · gooood</a>}
+        <div className="collaboration-project-rows">
+          {collaborationCollections.map((collection) => (
+            <section className="collaboration-project-row" key={collection.num}>
+              <header className="collaboration-row-heading">
+                <div><span>{collection.num} / {collection.english}</span><h3>{collection.title}</h3></div>
+                <p>{collection.description}</p>
+                <button type="button" onClick={() => setActiveCollection(collection)}>查看全部 <MoveRight size={16} /></button>
+              </header>
+              <div className="collaboration-row-grid">
+                {collection.projects.map((item, index) => (
+                  <article className="collaboration-row-project" key={item.id}>
+                    {item.project ? (
+                      <button type="button" className="collaboration-row-cover" onClick={() => setActiveProject(item.project)} aria-label={`查看${item.title}项目详情`}>
+                        <DeferredImage src={item.image} alt={item.title} />
+                        <span>查看项目 <MoveRight size={14} /></span>
+                      </button>
+                    ) : (
+                      <div className="collaboration-row-cover is-placeholder">
+                        <DeferredImage src={item.image} alt={`${item.title}临时示意图`} />
+                        <span>内容待补充</span>
+                      </div>
+                    )}
+                    <div className="collaboration-row-caption"><span>{collection.num}.{String(index + 1).padStart(2, '0')}</span><strong>{item.title}</strong></div>
+                    {item.source && <a className="collaboration-row-source" href={item.source} target="_blank" rel="noreferrer">临时示意图 · gooood</a>}
+                  </article>
+                ))}
               </div>
-              <p>{text}</p>
-            </article>
+            </section>
           ))}
         </div>
       </section>
