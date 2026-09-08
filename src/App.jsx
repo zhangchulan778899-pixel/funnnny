@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { Mail, Phone, MapPin, MoveRight, X } from 'lucide-react'
-import BorderGlow from './components/BorderGlow'
 import PortfolioDialog from './components/PortfolioDialog'
 
 const projects = [
@@ -108,6 +107,21 @@ const collaborations = [
   ['02', '小设计', 'SMALL-SCALE DESIGN', '承接空间装置、展陈节点、景观小品与局部改造，以轻量尺度回应具体场景与真实使用需求。'],
   ['03', '快题设计', 'RAPID DESIGN', '针对升学、竞赛与方案汇报需求，提供限时构思、图面组织、表达优化及针对性设计辅导。'],
   ['04', '作品分享', 'PORTFOLIO SHARING', '持续整理设计过程、图纸表达与作品集经验，也欢迎围绕建筑学习与创作展开内容合作。'],
+]
+
+const collaborationCovers = [
+  { src: '/project-02-nanyuan/cover.webp', label: '湖南工程学院南苑改造' },
+  { src: '/small-design-01/effect-01.jpg', label: '光遇——建造节装置设计' },
+  {
+    src: '/collaboration-placeholders/rapid-design.jpg',
+    label: '苏州金鸡湖公共空间（临时示意）',
+    source: 'https://www.gooood.cn/jinji-lake-landscape-design-by-aecom.htm',
+  },
+  {
+    src: '/collaboration-placeholders/portfolio-sharing.jpg',
+    label: '上海经浦园（临时示意）',
+    source: 'https://www.gooood.cn/jingpu-garden-by-original-design-studio.htm',
+  },
 ]
 
 const commercialArchitectureProject = {
@@ -764,26 +778,22 @@ function App() {
 
       <section className="strengths collaboration section shell" id="collaboration">
         <div className="section-heading collaboration-heading"><span>02 / COLLABORATION</span><div><h2>合作展示</h2><p>从建筑到表达，承接多尺度设计委托。</p></div></div>
-        <div className="strength-grid">
+        <div className="collaboration-project-grid">
           {collaborations.map(([num, title, english, text], index) => (
-            <BorderGlow
-              key={num}
-              className={`collaboration-glow collaboration-glow--${index + 1}`}
-              edgeSensitivity={26}
-              glowColor="210 94 63"
-              backgroundColor="#eeeef0"
-              borderRadius={28}
-              glowRadius={34}
-              glowIntensity={0.9}
-              coneSpread={22}
-              fillOpacity={0.16}
-              colors={['#55c2ff', '#7c8cff', '#be78ff']}
-            >
-              <article className="collaboration-card">
-                <span>{num} / {english}</span><h3>{title}</h3><p>{text}</p>
-                <button type="button" className="collaboration-project-link" onClick={() => setActiveCollection(collaborationCollections.find((collection) => collection.num === num))} aria-label={`查看${title}项目列表`}>查看项目 <MoveRight size={18} /></button>
-              </article>
-            </BorderGlow>
+            <article className="collaboration-project-tile" key={num}>
+              <button type="button" className="collaboration-project-cover" onClick={() => setActiveCollection(collaborationCollections.find((collection) => collection.num === num))} aria-label={`查看${title}项目列表`}>
+                <DeferredImage src={collaborationCovers[index].src} alt={collaborationCovers[index].label} />
+                <span>查看项目 <MoveRight size={15} /></span>
+              </button>
+              <div className="collaboration-project-caption">
+                <button type="button" onClick={() => setActiveCollection(collaborationCollections.find((collection) => collection.num === num))}>
+                  <span>{num} /</span> {title}
+                </button>
+                <small>{english}</small>
+                {collaborationCovers[index].source && <a href={collaborationCovers[index].source} target="_blank" rel="noreferrer">临时示意图 · gooood</a>}
+              </div>
+              <p>{text}</p>
+            </article>
           ))}
         </div>
       </section>
