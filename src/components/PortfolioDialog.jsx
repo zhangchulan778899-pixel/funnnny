@@ -1,12 +1,16 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { X } from 'lucide-react'
 import './PortfolioDialog.css'
+import { portfolioDocument } from './portfolioDocument'
 
 export default function PortfolioDialog({ onClose }) {
   const dialogRef = useRef(null)
   const frameRef = useRef(null)
   const [frameStatus, setFrameStatus] = useState('loading')
   const [attempt, setAttempt] = useState(0)
+  const documentHtml = useMemo(() => portfolioDocument(window.location.origin), [])
+  const closeRef = useRef(onClose)
+  closeRef.current = onClose
   useEffect(() => {
     const dialog = dialogRef.current
     const opener = document.activeElement
@@ -32,14 +36,14 @@ export default function PortfolioDialog({ onClose }) {
         settled = true
         window.clearTimeout(timeout)
         setFrameStatus(event.data.type)
-      } else if (event.data.type === 'close') onClose()
+      } else if (event.data.type === 'close') closeRef.current()
     }
     window.addEventListener('message', receiveBookMessage)
     return () => {
       window.clearTimeout(timeout)
       window.removeEventListener('message', receiveBookMessage)
     }
-  }, [attempt, onClose])
+  }, [attempt])
 
   const connectFrame = () => {
     // postMessage is safe even if a failed navigation leaves an opaque error document.
@@ -62,7 +66,7 @@ export default function PortfolioDialog({ onClose }) {
         <button type="button" className="portfolio-close" onClick={onClose} aria-label="关闭作品集" autoFocus><X size={20} /></button>
       </header>
       <div className="portfolio-dialog-body">
-        <iframe ref={frameRef} key={attempt} className="portfolio-book-frame" data-ready={frameStatus === 'ready'} src={`/portfolio-book/index.html?embed=1&attempt=${attempt}`} title="范钦威建筑作品集翻页画册" onLoad={connectFrame} onError={() => setFrameStatus('error')} />
+        <iframe ref={frameRef} key={attempt} className="portfolio-book-frame" data-ready={frameStatus === 'ready'} srcDoc={documentHtml} title="范钦威建筑作品集翻页画册" onLoad={connectFrame} onError={() => setFrameStatus('error')} />
         {frameStatus !== 'ready' && <div className="portfolio-book-status" role="status" aria-live="polite">
           <p>{frameStatus === 'error' ? '作品集暂时未能加载，请确认网站连接后重试。' : '正在打开作品集…'}</p>
           {frameStatus === 'error' && <button type="button" onClick={retryBook}>重新加载作品集</button>}

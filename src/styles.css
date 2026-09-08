@@ -175,7 +175,7 @@
 @media(max-width:430px){.profile-panel-body{grid-template-columns:82px minmax(0,1fr)}.profile-panel-copy h2{font-size:20px}.profile-panel-copy p:not(.profile-lead){display:none}.profile-panel-stats div{padding:11px 6px}.profile-competitions-head small{display:none}.profile-panel-contact{gap:8px 12px}}
 
 /* Apple-inspired editorial system for projects and collaboration */
-.works{padding:132px 0;background:#f5f5f7;color:#1d1d1f}
+.works{padding:132px 0;background:#fff;color:#1d1d1f}
 .works-heading{grid-template-columns:34% minmax(0,1fr);align-items:end;margin-bottom:62px}
 .works-heading>span{font-weight:600;color:#6e6e73}
 .works-heading h2{justify-self:end;font-family:'Noto Sans SC',sans-serif;font-size:clamp(31px,3vw,48px);font-weight:600;line-height:1.1;letter-spacing:-2.4px;text-align:right}
