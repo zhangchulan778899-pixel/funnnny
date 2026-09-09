@@ -362,11 +362,10 @@
 .collaboration-row-heading>div>span{display:block;margin-bottom:9px;font-size:9px;font-weight:600;letter-spacing:1.45px;color:#929297}
 .collaboration-row-heading h3{margin:0;font-family:'Noto Sans SC',sans-serif;font-size:clamp(25px,2.2vw,36px);font-weight:500;line-height:1.15;letter-spacing:-1.4px}
 .collaboration-row-heading p{max-width:540px;margin:0;font-size:11px;line-height:1.75;color:#77797c}
-.collaboration-row-loop{width:100%;overflow:hidden;touch-action:pan-y}
-.collaboration-row-track{display:flex;gap:28px;width:max-content;min-width:100%;animation:collaboration-loop var(--loop-duration,34s) linear var(--loop-delay,0s) infinite;will-change:transform}
+.collaboration-row-loop{width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;touch-action:pan-x pan-y;cursor:ew-resize}
+.collaboration-row-loop::-webkit-scrollbar{display:none}
+.collaboration-row-track{display:flex;gap:28px;width:max-content;min-width:100%}
 .collaboration-loop-set{flex:0 0 calc((100vw - max(112px,100vw - 1700px)));width:calc((100vw - max(112px,100vw - 1700px)));display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
-.collaboration-row-loop:hover .collaboration-row-track,.collaboration-row-loop:focus-within .collaboration-row-track{animation-play-state:paused}
-@keyframes collaboration-loop{to{transform:translateX(calc(-50% - 14px))}}
 .collaboration-row-project{min-width:0}
 .collaboration-row-cover{appearance:none;position:relative;display:block;width:100%;aspect-ratio:1.22/1;padding:0;overflow:hidden;border:0;background:#ececee;color:#fff;text-align:left}
 button.collaboration-row-cover{cursor:pointer}
@@ -382,6 +381,6 @@ button.collaboration-row-cover:focus-visible{outline:2px solid #1d1d1f;outline-o
 .collaboration-row-caption strong{min-width:0;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .collaboration-row-source{display:inline-block;margin-top:5px;color:#9a9a9f;font-size:8px;letter-spacing:.25px}
 .collaboration-row-source:hover{text-decoration:underline}
-@media(max-width:1000px){.collaboration{padding-bottom:120px}.collaboration-project-rows{gap:76px}.collaboration-row-heading{grid-template-columns:1fr 1.5fr}.collaboration-row-track{gap:22px;animation-duration:50s}.collaboration-loop-set{flex-basis:calc(200% + 22px);width:calc(200% + 22px);gap:22px}@keyframes collaboration-loop{to{transform:translateX(calc(-50% - 11px))}}}
-@media(max-width:760px){.collaboration{padding-bottom:100px}.collaboration-heading{margin-bottom:50px}.collaboration-heading h2{font-size:40px;letter-spacing:-2px;text-align:center}.collaboration-project-rows{gap:64px}.collaboration-row-heading{grid-template-columns:1fr;gap:15px;margin-bottom:24px}.collaboration-row-heading p{font-size:10px}.collaboration-row-track{gap:12px}.collaboration-loop-set{flex-basis:calc(200% + 12px);width:calc(200% + 12px);gap:12px}.collaboration-row-cover{aspect-ratio:1/1}.collaboration-row-caption{display:block}.collaboration-row-caption span{display:block;margin-bottom:3px}.collaboration-row-caption strong{display:block;font-size:10px}.collaboration-row-source{font-size:7px}@keyframes collaboration-loop{to{transform:translateX(calc(-50% - 6px))}}}
+@media(max-width:1000px){.collaboration{padding-bottom:120px}.collaboration-project-rows{gap:76px}.collaboration-row-heading{grid-template-columns:1fr 1.5fr}.collaboration-row-track{gap:22px}.collaboration-loop-set{flex-basis:calc(200% + 22px);width:calc(200% + 22px);gap:22px}}
+@media(max-width:760px){.collaboration{padding-bottom:100px}.collaboration-heading{margin-bottom:50px}.collaboration-heading h2{font-size:40px;letter-spacing:-2px;text-align:center}.collaboration-project-rows{gap:64px}.collaboration-row-heading{grid-template-columns:1fr;gap:15px;margin-bottom:24px}.collaboration-row-heading p{font-size:10px}.collaboration-row-track{gap:12px}.collaboration-loop-set{flex-basis:calc(200% + 12px);width:calc(200% + 12px);gap:12px}.collaboration-row-cover{aspect-ratio:1/1}.collaboration-row-caption{display:block}.collaboration-row-caption span{display:block;margin-bottom:3px}.collaboration-row-caption strong{display:block;font-size:10px}.collaboration-row-source{font-size:7px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

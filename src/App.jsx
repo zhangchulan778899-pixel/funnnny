@@ -311,6 +311,78 @@ function DeferredImage({ src, alt, className, rootMargin = '600px 0px', ...props
   return <img ref={imageRef} className={className} src={ready ? src : undefined} data-src={ready ? undefined : src} alt={alt} decoding="async" {...props} />
 }
 
+function CollaborationCarousel({ collection, onOpenProject }) {
+  const scrollerRef = useRef(null)
+
+  useEffect(() => {
+    const scroller = scrollerRef.current
+    if (!scroller) return undefined
+
+    const getSegmentWidth = () => {
+      const set = scroller.querySelector('.collaboration-loop-set')
+      const track = scroller.querySelector('.collaboration-row-track')
+      if (!set || !track) return 0
+      return set.offsetWidth + (Number.parseFloat(window.getComputedStyle(track).columnGap) || 0)
+    }
+
+    const centerLoop = () => { scroller.scrollLeft = getSegmentWidth() }
+    const frame = window.requestAnimationFrame(centerLoop)
+    const resizeObserver = new ResizeObserver(centerLoop)
+    resizeObserver.observe(scroller)
+
+    const handleWheel = (event) => {
+      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY
+      if (!delta) return
+      event.preventDefault()
+      scroller.scrollLeft += delta
+    }
+
+    const handleScroll = () => {
+      const segment = getSegmentWidth()
+      if (!segment) return
+      if (scroller.scrollLeft < segment * .45) scroller.scrollLeft += segment
+      if (scroller.scrollLeft > segment * 1.55) scroller.scrollLeft -= segment
+    }
+
+    scroller.addEventListener('wheel', handleWheel, { passive: false })
+    scroller.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.cancelAnimationFrame(frame)
+      resizeObserver.disconnect()
+      scroller.removeEventListener('wheel', handleWheel)
+      scroller.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  return (
+    <div ref={scrollerRef} className="collaboration-row-loop" aria-label={`${collection.title}项目横向循环展示`}>
+      <div className="collaboration-row-track">
+        {[true, false, true].map((isClone, setIndex) => (
+          <div className="collaboration-loop-set" key={setIndex} aria-hidden={isClone || undefined}>
+            {collection.projects.map((item, index) => (
+              <article className="collaboration-row-project" key={`${item.id}-${setIndex}`}>
+                {item.project ? (
+                  <button type="button" tabIndex={isClone ? -1 : undefined} className="collaboration-row-cover" onClick={() => onOpenProject(item.project)} aria-label={`查看${item.title}项目详情`}>
+                    <DeferredImage src={item.image} alt={isClone ? '' : item.title} />
+                    <span>查看项目 <MoveRight size={14} /></span>
+                  </button>
+                ) : (
+                  <div className="collaboration-row-cover is-placeholder">
+                    <DeferredImage src={item.image} alt={isClone ? '' : `${item.title}临时示意图`} />
+                    <span>内容待补充</span>
+                  </div>
+                )}
+                <div className="collaboration-row-caption"><span>{collection.num}.{String(index + 1).padStart(2, '0')}</span><strong>{item.title}</strong></div>
+                {item.source && <a tabIndex={isClone ? -1 : undefined} className="collaboration-row-source" href={item.source} target="_blank" rel="noreferrer">临时示意图 · gooood</a>}
+              </article>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function useTypewriter(text, speed = 38, startDelay = 600) {
   const [displayed, setDisplayed] = useState('')
 
@@ -786,37 +858,13 @@ function App() {
       <section className="strengths collaboration section shell" id="collaboration">
         <div className="section-heading collaboration-heading"><span>02 / COLLABORATION</span><div><h2>合作展示</h2><p>从建筑到表达，承接多尺度设计委托。</p></div></div>
         <div className="collaboration-project-rows">
-          {collaborationCollections.map((collection, collectionIndex) => (
+          {collaborationCollections.map((collection) => (
             <section className="collaboration-project-row" key={collection.num}>
               <header className="collaboration-row-heading">
                 <div><span>{collection.num} / {collection.english}</span><h3>{collection.title}</h3></div>
                 <p>{collection.description}</p>
               </header>
-              <div className="collaboration-row-loop" aria-label={`${collection.title}项目横向循环展示`}>
-                <div className="collaboration-row-track" style={{ '--loop-duration': `${30 + collectionIndex * 4}s`, '--loop-delay': `${collectionIndex * -5}s` }}>
-                  {[false, true].map((isClone) => (
-                    <div className="collaboration-loop-set" key={isClone ? 'clone' : 'original'} aria-hidden={isClone || undefined}>
-                      {collection.projects.map((item, index) => (
-                        <article className="collaboration-row-project" key={`${item.id}-${isClone ? 'clone' : 'original'}`}>
-                          {item.project ? (
-                            <button type="button" tabIndex={isClone ? -1 : undefined} className="collaboration-row-cover" onClick={() => setActiveProject(item.project)} aria-label={`查看${item.title}项目详情`}>
-                              <DeferredImage src={item.image} alt={isClone ? '' : item.title} />
-                              <span>查看项目 <MoveRight size={14} /></span>
-                            </button>
-                          ) : (
-                            <div className="collaboration-row-cover is-placeholder">
-                              <DeferredImage src={item.image} alt={isClone ? '' : `${item.title}临时示意图`} />
-                              <span>内容待补充</span>
-                            </div>
-                          )}
-                          <div className="collaboration-row-caption"><span>{collection.num}.{String(index + 1).padStart(2, '0')}</span><strong>{item.title}</strong></div>
-                          {item.source && <a tabIndex={isClone ? -1 : undefined} className="collaboration-row-source" href={item.source} target="_blank" rel="noreferrer">临时示意图 · gooood</a>}
-                        </article>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <CollaborationCarousel collection={collection} onOpenProject={setActiveProject} />
             </section>
           ))}
         </div>
