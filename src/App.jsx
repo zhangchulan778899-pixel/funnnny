@@ -786,31 +786,36 @@ function App() {
       <section className="strengths collaboration section shell" id="collaboration">
         <div className="section-heading collaboration-heading"><span>02 / COLLABORATION</span><div><h2>合作展示</h2><p>从建筑到表达，承接多尺度设计委托。</p></div></div>
         <div className="collaboration-project-rows">
-          {collaborationCollections.map((collection) => (
+          {collaborationCollections.map((collection, collectionIndex) => (
             <section className="collaboration-project-row" key={collection.num}>
               <header className="collaboration-row-heading">
                 <div><span>{collection.num} / {collection.english}</span><h3>{collection.title}</h3></div>
                 <p>{collection.description}</p>
-                <button type="button" onClick={() => setActiveCollection(collection)}>查看全部 <MoveRight size={16} /></button>
               </header>
-              <div className="collaboration-row-grid">
-                {collection.projects.map((item, index) => (
-                  <article className="collaboration-row-project" key={item.id}>
-                    {item.project ? (
-                      <button type="button" className="collaboration-row-cover" onClick={() => setActiveProject(item.project)} aria-label={`查看${item.title}项目详情`}>
-                        <DeferredImage src={item.image} alt={item.title} />
-                        <span>查看项目 <MoveRight size={14} /></span>
-                      </button>
-                    ) : (
-                      <div className="collaboration-row-cover is-placeholder">
-                        <DeferredImage src={item.image} alt={`${item.title}临时示意图`} />
-                        <span>内容待补充</span>
-                      </div>
-                    )}
-                    <div className="collaboration-row-caption"><span>{collection.num}.{String(index + 1).padStart(2, '0')}</span><strong>{item.title}</strong></div>
-                    {item.source && <a className="collaboration-row-source" href={item.source} target="_blank" rel="noreferrer">临时示意图 · gooood</a>}
-                  </article>
-                ))}
+              <div className="collaboration-row-loop" aria-label={`${collection.title}项目横向循环展示`}>
+                <div className="collaboration-row-track" style={{ '--loop-duration': `${30 + collectionIndex * 4}s`, '--loop-delay': `${collectionIndex * -5}s` }}>
+                  {[false, true].map((isClone) => (
+                    <div className="collaboration-loop-set" key={isClone ? 'clone' : 'original'} aria-hidden={isClone || undefined}>
+                      {collection.projects.map((item, index) => (
+                        <article className="collaboration-row-project" key={`${item.id}-${isClone ? 'clone' : 'original'}`}>
+                          {item.project ? (
+                            <button type="button" tabIndex={isClone ? -1 : undefined} className="collaboration-row-cover" onClick={() => setActiveProject(item.project)} aria-label={`查看${item.title}项目详情`}>
+                              <DeferredImage src={item.image} alt={isClone ? '' : item.title} />
+                              <span>查看项目 <MoveRight size={14} /></span>
+                            </button>
+                          ) : (
+                            <div className="collaboration-row-cover is-placeholder">
+                              <DeferredImage src={item.image} alt={isClone ? '' : `${item.title}临时示意图`} />
+                              <span>内容待补充</span>
+                            </div>
+                          )}
+                          <div className="collaboration-row-caption"><span>{collection.num}.{String(index + 1).padStart(2, '0')}</span><strong>{item.title}</strong></div>
+                          {item.source && <a tabIndex={isClone ? -1 : undefined} className="collaboration-row-source" href={item.source} target="_blank" rel="noreferrer">临时示意图 · gooood</a>}
+                        </article>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
             </section>
           ))}
