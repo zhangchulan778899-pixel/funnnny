@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Mail, Phone, MapPin, MoveRight, X } from 'lucide-react'
+import { Mail, Phone, MapPin, MoveRight, Moon, Sun, X } from 'lucide-react'
 import PortfolioDialog from './components/PortfolioDialog'
 
 const projects = [
@@ -8,7 +8,7 @@ const projects = [
     title: '画院庭生·隆回滩头传统民居改造',
     subtitle: '第七届全国绿建一等奖',
     year: '2025',
-    image: '/project-01.webp',
+    image: '/project-01-cover.jpg',
     logo: '/project-logo-01.png',
     gallery: [
       { src: '/project-01-gallery/aerial.jpg', caption: '整体鸟瞰 · OVERALL AERIAL VIEW' },
@@ -40,7 +40,7 @@ const projects = [
     title: '延景·融生—青少年活动中心设计',
     subtitle: '城市设计 / 青少年公共活动空间',
     year: '2024',
-    image: '/project-03.webp',
+    image: '/project-03-cover.jpg',
     logo: '/project-logo-03.png',
     gallery: [
       { src: '/project-03-gallery/autumn-aerial.jpg', caption: '秋季鸟瞰 · AUTUMN AERIAL VIEW' },
@@ -105,8 +105,7 @@ const projects = [
 const collaborations = [
   ['01', '建筑设计', 'ARCHITECTURAL DESIGN', '面向住宅、公共建筑与更新项目，提供概念构思、空间推演、方案深化及建筑表现等完整设计服务。'],
   ['02', '小设计', 'SMALL-SCALE DESIGN', '承接空间装置、展陈节点、景观小品与局部改造，以轻量尺度回应具体场景与真实使用需求。'],
-  ['03', '快题设计', 'RAPID DESIGN', '针对升学、竞赛与方案汇报需求，提供限时构思、图面组织、表达优化及针对性设计辅导。'],
-  ['04', '作品分享', 'PORTFOLIO SHARING', '持续整理设计过程、图纸表达与作品集经验，也欢迎围绕建筑学习与创作展开内容合作。'],
+  ['03', '作品分享', 'PORTFOLIO SHARING', '持续整理设计过程、图纸表达与作品集经验，也欢迎围绕建筑学习与创作展开内容合作。'],
 ]
 
 const collaborationPlaceholderCovers = [
@@ -124,15 +123,16 @@ const collaborationPlaceholderCovers = [
   '/collaboration-placeholders/portfolio-sharing.jpg',
 ]
 
-const collaborationPlaceholderStarts = { '01': 0, '02': 2, '03': 4, '04': 8 }
+const collaborationPlaceholderStarts = { '01': 0, '02': 2, '03': 8 }
 const goooodCategorySource = 'https://www.gooood.cn/category/type/architecture'
+const goooodYangshuoSource = 'https://www.gooood.cn/alila-yangshuo-china-by-vector-architects.htm'
 
 const commercialArchitectureProject = {
   index: 'C01',
   title: '旧址新序——鹤岭镇废弃铁路维修站活化改造设计',
   subtitle: '建筑设计商单 / 工业遗产活化改造 / 完整方案展示',
   year: '2026',
-  image: '/commercial-architecture-01/page-02.jpg',
+  image: '/commercial-architecture-01/cover.jpg',
   gallery: [
     { src: '/commercial-architecture-01/page-02.jpg', caption: '整体鸟瞰 · OVERALL AERIAL VIEW' },
     { src: '/commercial-architecture-01/page-05.jpg', caption: '项目背景 · PROJECT BACKGROUND' },
@@ -178,6 +178,21 @@ const nanyuanArchitectureProject = {
     { src: '/project-02-nanyuan/old-new-dialogue.webp', caption: '新旧对话 · OLD MEMORIES AND NEW WEAVING' },
     { src: '/project-02-nanyuan/lantern-festival.webp', caption: '游灯迷 · LANTERN FESTIVAL' },
     { src: '/project-02-nanyuan/after-rain.webp', caption: '雨后绿荫 · GREEN SHADE AFTER RAIN' },
+  ],
+}
+
+const farmlandFactoryProject = {
+  index: 'C03',
+  title: '农田旁的厂房',
+  subtitle: '工业厂房改造 / 乡村更新 / 建筑再生',
+  year: '—',
+  image: '/farmland-factory/cover.jpg',
+  gallery: [
+    { src: '/farmland-factory/cover.jpg', caption: '整体鸟瞰 · OVERALL AERIAL VIEW' },
+    { src: '/farmland-factory/night-01.webp', caption: '夜景一 · NIGHT VIEW 01' },
+    { src: '/farmland-factory/night-02.webp', caption: '夜景二 · NIGHT VIEW 02' },
+    { src: '/farmland-factory/night-03.webp', caption: '夜景三 · NIGHT VIEW 03' },
+    { src: '/farmland-factory/rain-01.webp', caption: '雨景 · RAINY VIEW' },
   ],
 }
 
@@ -240,6 +255,17 @@ const collaborationCollections = collaborations.map(([num, title, english, descr
       }
     }
 
+    if (num === '01' && index === 2) {
+      return {
+        id: 'C03',
+        title: farmlandFactoryProject.title,
+        subtitle: farmlandFactoryProject.subtitle,
+        year: farmlandFactoryProject.year,
+        image: farmlandFactoryProject.image,
+        project: farmlandFactoryProject,
+      }
+    }
+
     if (num === '02' && index === 0) {
       return {
         id: 'S01',
@@ -271,7 +297,7 @@ const collaborationCollections = collaborations.map(([num, title, english, descr
       subtitle: 'PROJECT FRAMEWORK / 内容待补充',
       year: '—',
       image: collaborationPlaceholderCovers[placeholderIndex],
-      source: goooodCategorySource,
+      source: num === '03' && index === 0 ? goooodYangshuoSource : goooodCategorySource,
     }
   }),
 }))
@@ -286,8 +312,6 @@ const competitionExperience = [
   { year: '2023', title: '湖南省顶峰设计竞赛', award: '铜奖' },
   { year: '2023', title: '首届湖南省大学生节能减排社会实践与科技竞赛', award: '三等奖' },
 ]
-
-const contactMessage = '很高兴你来到这里。告诉我你的场地、想法与时间，我们从一封邮件开始。'
 
 function DeferredImage({ src, alt, className, rootMargin = '600px 0px', ...props }) {
   const imageRef = useRef(null)
@@ -318,6 +342,10 @@ function CollaborationCarousel({ collection, onOpenProject }) {
     const scroller = scrollerRef.current
     if (!scroller) return undefined
 
+    let scrollTarget = 0
+    let animationFrame = 0
+    let isAnimating = false
+
     const getSegmentWidth = () => {
       const set = scroller.querySelector('.collaboration-loop-set')
       const track = scroller.querySelector('.collaboration-row-track')
@@ -325,29 +353,69 @@ function CollaborationCarousel({ collection, onOpenProject }) {
       return set.offsetWidth + (Number.parseFloat(window.getComputedStyle(track).columnGap) || 0)
     }
 
-    const centerLoop = () => { scroller.scrollLeft = getSegmentWidth() }
+    const centerLoop = () => {
+      const segment = getSegmentWidth()
+      if (!segment) return
+      scroller.scrollLeft = segment
+      scrollTarget = segment
+    }
     const frame = window.requestAnimationFrame(centerLoop)
     const resizeObserver = new ResizeObserver(centerLoop)
     resizeObserver.observe(scroller)
 
+    const wrapLoop = () => {
+      const segment = getSegmentWidth()
+      if (!segment) return
+
+      if (scroller.scrollLeft < segment * .5) {
+        scroller.scrollLeft += segment
+        scrollTarget += segment
+      } else if (scroller.scrollLeft > segment * 1.5) {
+        scroller.scrollLeft -= segment
+        scrollTarget -= segment
+      }
+    }
+
+    const animateScroll = () => {
+      const distance = scrollTarget - scroller.scrollLeft
+      if (Math.abs(distance) < .35) {
+        scroller.scrollLeft = scrollTarget
+        isAnimating = false
+        animationFrame = 0
+        return
+      }
+
+      scroller.scrollLeft += distance * .16
+      wrapLoop()
+      animationFrame = window.requestAnimationFrame(animateScroll)
+    }
+
     const handleWheel = (event) => {
-      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY
-      if (!delta) return
+      if (event.ctrlKey) return
+      const rawDelta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY
+      if (!rawDelta) return
       event.preventDefault()
-      scroller.scrollLeft += delta
+      const deltaScale = event.deltaMode === 1 ? 18 : event.deltaMode === 2 ? scroller.clientWidth : 1
+      const delta = Math.max(-220, Math.min(220, rawDelta * deltaScale))
+      if (!isAnimating) scrollTarget = scroller.scrollLeft
+      scrollTarget += delta * 1.05
+
+      if (!isAnimating) {
+        isAnimating = true
+        animationFrame = window.requestAnimationFrame(animateScroll)
+      }
     }
 
     const handleScroll = () => {
-      const segment = getSegmentWidth()
-      if (!segment) return
-      if (scroller.scrollLeft < segment * .45) scroller.scrollLeft += segment
-      if (scroller.scrollLeft > segment * 1.55) scroller.scrollLeft -= segment
+      wrapLoop()
+      if (!isAnimating) scrollTarget = scroller.scrollLeft
     }
 
     scroller.addEventListener('wheel', handleWheel, { passive: false })
     scroller.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       window.cancelAnimationFrame(frame)
+      window.cancelAnimationFrame(animationFrame)
       resizeObserver.disconnect()
       scroller.removeEventListener('wheel', handleWheel)
       scroller.removeEventListener('scroll', handleScroll)
@@ -383,100 +451,166 @@ function CollaborationCarousel({ collection, onOpenProject }) {
   )
 }
 
-function useTypewriter(text, speed = 38, startDelay = 600) {
-  const [displayed, setDisplayed] = useState('')
+function ContactProjectLoop({ onOpenProject }) {
+  const scrollerRef = useRef(null)
 
   useEffect(() => {
-    setDisplayed('')
-    let index = 0
-    let interval
-    const delay = window.setTimeout(() => {
-      interval = window.setInterval(() => {
-        index += 1
-        setDisplayed(text.slice(0, index))
-        if (index >= text.length) window.clearInterval(interval)
-      }, speed)
-    }, startDelay)
-    return () => {
-      window.clearTimeout(delay)
-      window.clearInterval(interval)
-    }
-  }, [text, speed, startDelay])
+    const scroller = scrollerRef.current
+    if (!scroller) return undefined
 
-  return { displayed, done: displayed.length >= text.length }
+    let scrollTarget = 0
+    let animationFrame = 0
+    let wheelIdleTimer = 0
+    let pointerActive = false
+    let focusActive = false
+    let resumeAt = 0
+    let wheelActive = false
+    let lastFrame = performance.now()
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const autoSpeed = .035
+    const wheelIdleDelay = 650
+
+    const getSegmentWidth = () => {
+      const set = scroller.querySelector('.contact-project-set')
+      const track = scroller.querySelector('.contact-project-track')
+      if (!set || !track) return 0
+      return set.offsetWidth + (Number.parseFloat(window.getComputedStyle(track).columnGap) || 0)
+    }
+
+    const centerLoop = () => {
+      const segment = getSegmentWidth()
+      if (!segment) return
+      scroller.scrollLeft = segment
+      scrollTarget = segment
+    }
+
+    const wrapLoop = () => {
+      const segment = getSegmentWidth()
+      if (!segment) return
+      if (scroller.scrollLeft < segment * .5) {
+        scroller.scrollLeft += segment
+        scrollTarget += segment
+      } else if (scroller.scrollLeft > segment * 1.5) {
+        scroller.scrollLeft -= segment
+        scrollTarget -= segment
+      }
+    }
+
+    const animateScroll = (timestamp) => {
+      const elapsed = Math.min(40, Math.max(0, timestamp - lastFrame))
+      lastFrame = timestamp
+      const distance = scrollTarget - scroller.scrollLeft
+
+      if (!document.hidden) {
+        if (wheelActive) {
+          if (Math.abs(distance) > .25) {
+            const easing = 1 - Math.exp(-elapsed * .014)
+            scroller.scrollLeft += distance * easing
+          } else {
+            scroller.scrollLeft = scrollTarget
+          }
+        } else if (!reduceMotion && !pointerActive && !focusActive && timestamp >= resumeAt) {
+          scroller.scrollLeft += autoSpeed * elapsed
+          scrollTarget = scroller.scrollLeft
+        }
+
+        wrapLoop()
+      }
+
+      animationFrame = window.requestAnimationFrame(animateScroll)
+    }
+
+    const handleWheel = (event) => {
+      if (event.ctrlKey) return
+      const rawDelta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY
+      if (!rawDelta) return
+      event.preventDefault()
+
+      if (!wheelActive) scrollTarget = scroller.scrollLeft
+      wheelActive = true
+      window.clearTimeout(wheelIdleTimer)
+
+      const deltaScale = event.deltaMode === 1 ? 18 : event.deltaMode === 2 ? scroller.clientWidth : 1
+      const delta = Math.max(-220, Math.min(220, rawDelta * deltaScale))
+      scrollTarget += delta * 1.05
+
+      wheelIdleTimer = window.setTimeout(() => {
+        wheelActive = false
+        scrollTarget = scroller.scrollLeft
+        lastFrame = performance.now()
+      }, wheelIdleDelay)
+    }
+
+    const handleScroll = () => {
+      wrapLoop()
+      if (!wheelActive) scrollTarget = scroller.scrollLeft
+    }
+
+    const startPointerInteraction = () => {
+      pointerActive = true
+    }
+
+    const endPointerInteraction = () => {
+      pointerActive = false
+      resumeAt = performance.now() + 800
+    }
+
+    const startFocusInteraction = () => {
+      focusActive = true
+    }
+
+    const endFocusInteraction = () => {
+      focusActive = false
+      resumeAt = performance.now() + 800
+    }
+
+    const frame = window.requestAnimationFrame(centerLoop)
+    animationFrame = window.requestAnimationFrame(animateScroll)
+    const resizeObserver = new ResizeObserver(centerLoop)
+    resizeObserver.observe(scroller)
+    scroller.addEventListener('wheel', handleWheel, { passive: false })
+    scroller.addEventListener('scroll', handleScroll, { passive: true })
+    scroller.addEventListener('pointerdown', startPointerInteraction)
+    scroller.addEventListener('pointerup', endPointerInteraction)
+    scroller.addEventListener('pointercancel', endPointerInteraction)
+    scroller.addEventListener('focusin', startFocusInteraction)
+    scroller.addEventListener('focusout', endFocusInteraction)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.cancelAnimationFrame(animationFrame)
+      window.clearTimeout(wheelIdleTimer)
+      resizeObserver.disconnect()
+      scroller.removeEventListener('wheel', handleWheel)
+      scroller.removeEventListener('scroll', handleScroll)
+      scroller.removeEventListener('pointerdown', startPointerInteraction)
+      scroller.removeEventListener('pointerup', endPointerInteraction)
+      scroller.removeEventListener('pointercancel', endPointerInteraction)
+      scroller.removeEventListener('focusin', startFocusInteraction)
+      scroller.removeEventListener('focusout', endFocusInteraction)
+    }
+  }, [])
+
+  return (
+    <div className="contact-project-loop" ref={scrollerRef} aria-label="建筑项目循环画廊">
+      <div className="contact-project-track">
+        {[true, false, true].map((isDuplicate, setIndex) => (
+          <div className="contact-project-set" key={setIndex} aria-hidden={isDuplicate || undefined}>
+            {projects.map((project) => (
+              <button className="contact-project-card" type="button" key={`${setIndex}-${project.index}`} tabIndex={isDuplicate ? -1 : 0} onClick={() => onOpenProject(project)} aria-label={`查看${project.title}`}>
+                <span className="contact-project-image"><DeferredImage src={project.image} alt="" /></span>
+                <span className="contact-project-caption"><small>{project.index}</small><strong>{project.title}</strong></span>
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
 
-function ContactSection() {
-  const contactRef = useRef(null)
-  const videoRef = useRef(null)
-  const prevXRef = useRef(null)
-  const pendingXRef = useRef(null)
-  const moveFrameRef = useRef(null)
-  const targetTimeRef = useRef(0)
-  const seekingRef = useRef(false)
-  const [actionsVisible, setActionsVisible] = useState(false)
+function ContactSection({ onOpenProject }) {
   const [copied, setCopied] = useState(false)
-  const [videoActive, setVideoActive] = useState(false)
-  const { displayed, done } = useTypewriter(contactMessage)
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setActionsVisible(true), 400)
-    return () => window.clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    const contact = contactRef.current
-    if (!contact || !('IntersectionObserver' in window)) {
-      setVideoActive(true)
-      return undefined
-    }
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return
-      setVideoActive(true)
-      observer.disconnect()
-    }, { rootMargin: '600px 0px' })
-    observer.observe(contact)
-    return () => {
-      observer.disconnect()
-      if (moveFrameRef.current !== null) {
-        window.cancelAnimationFrame(moveFrameRef.current)
-        moveFrameRef.current = null
-      }
-    }
-  }, [])
-
-  const seekToTarget = () => {
-    const video = videoRef.current
-    if (!video || !Number.isFinite(video.duration) || seekingRef.current) return
-    if (Math.abs(video.currentTime - targetTimeRef.current) < 0.01) return
-    seekingRef.current = true
-    video.currentTime = targetTimeRef.current
-  }
-
-  const handleMouseMove = (event) => {
-    pendingXRef.current = event.clientX
-    if (moveFrameRef.current !== null) return
-    moveFrameRef.current = window.requestAnimationFrame(() => {
-      moveFrameRef.current = null
-      const video = videoRef.current
-      const pointerX = pendingXRef.current
-      if (!video || !Number.isFinite(video.duration) || pointerX === null) return
-      if (prevXRef.current === null) {
-        prevXRef.current = pointerX
-        return
-      }
-      const delta = pointerX - prevXRef.current
-      prevXRef.current = pointerX
-      const nextTime = targetTimeRef.current + (delta / window.innerWidth) * 0.8 * video.duration
-      targetTimeRef.current = Math.min(video.duration, Math.max(0, nextTime))
-      seekToTarget()
-    })
-  }
-
-  const handleSeeked = () => {
-    seekingRef.current = false
-    seekToTarget()
-  }
 
   const copyEmail = async () => {
     await navigator.clipboard.writeText('fqw19330235175@163.com')
@@ -485,21 +619,39 @@ function ContactSection() {
   }
 
   return (
-    <footer ref={contactRef} className="contact" id="contact" onMouseMove={handleMouseMove} onMouseLeave={() => { prevXRef.current = null }}>
-      <video ref={videoRef} className="contact-video" src={videoActive ? 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260530_042513_df96a13b-6155-4f6e-8b93-c9dee66fba08.mp4' : undefined} muted playsInline preload="metadata" onLoadedMetadata={() => { targetTimeRef.current = 0 }} onSeeked={handleSeeked} />
-      <div className="contact-wash" />
-      <div className="contact-top shell"><span>FUNNNNNY STUDIO</span><span>OPEN FOR COLLABORATION · 2026</span></div>
+    <footer className="contact" id="contact">
+      <div className="contact-top shell">
+        <a className="contact-signature" href="#home"><img src="/studio-mark.png" alt="" /><span>FUNNNNNY STUDIO</span></a>
+        <span>ARCHITECTURE · DESIGN · COLLABORATION</span>
+      </div>
       <div className="contact-stage shell">
         <div className="contact-dialogue">
-          <p className="contact-intro">你好，这里是 FUNNNNNY STUDIO<br />建筑与空间设计合作</p>
-          <p className="contact-typewriter">{displayed}{!done && <span className="typing-cursor" />}</p>
-          <div className={`contact-actions ${actionsVisible ? 'is-visible' : ''}`}>
-            {['建筑设计', '小设计', '快题设计', '作品分享'].map((label) => <a key={label} href="#collaboration">{label}</a>)}
+          <span className="contact-kicker">ABOUT / FUNNNNNY STUDIO</span>
+          <h2>FUNNNNNY STUDIO</h2>
+          <p className="contact-intro">我是范钦威，一名关注更新、公共空间与可持续设计的青年建筑设计师。期待与你讨论一个场地、一段记忆，或一个尚未成形的想法。</p>
+          <div className="contact-actions is-visible">
+            {['建筑设计', '小设计', '作品分享'].map((label) => <a key={label} href="#collaboration">{label}</a>)}
             <button type="button" className="contact-email" onClick={copyEmail}><span>{copied ? '邮箱已复制' : '联系我：'}<u>fqw19330235175@163.com</u></span><i aria-hidden="true" /></button>
           </div>
         </div>
+        <aside className="contact-qr-panel" aria-label="社交平台二维码联系方式">
+          <div className="contact-qr-heading"><span>保持联系</span><small>STAY CONNECTED</small></div>
+          <div className="contact-qr-grid">
+            <a className="contact-qr-card" href="/contact/wechat.jpg" target="_blank" rel="noreferrer" aria-label="查看微信二维码大图">
+              <img src="/contact/wechat.jpg" alt="FUNNNNNY 微信二维码" loading="lazy" decoding="async" />
+              <span>微信 <small>WECHAT</small></span>
+            </a>
+            <a className="contact-qr-card" href="/contact/xiaohongshu.jpg" target="_blank" rel="noreferrer" aria-label="查看小红书二维码大图">
+              <img src="/contact/xiaohongshu.jpg" alt="FUNNNNNY 小红书二维码" loading="lazy" decoding="async" />
+              <span>小红书 <small>REDNOTE</small></span>
+            </a>
+          </div>
+          <p>扫码添加微信或关注小红书，也可点击二维码查看大图。</p>
+        </aside>
       </div>
-      <div className="contact-bottom shell"><span>范钦威 · 建筑设计作品集</span><span>横向移动鼠标，探索画面</span><a href="#home">BACK TO TOP ↑</a></div>
+      <div className="contact-project-heading shell"><span>SELECTED ARCHITECTURE</span><p>自动轮播 · 滚轮 / 触摸可控制</p></div>
+      <ContactProjectLoop onOpenProject={onOpenProject} />
+      <div className="contact-bottom shell"><span>FUNNNNNY STUDIO · 2026</span><span>湖南 · 中国</span><a href="#home">BACK TO TOP ↑</a></div>
     </footer>
   )
 }
@@ -679,6 +831,12 @@ function App() {
   const [activeProject, setActiveProject] = useState(null)
   const [activeCollection, setActiveCollection] = useState(null)
   const [portfolioOpen, setPortfolioOpen] = useState(false)
+  const [theme, setTheme] = useState(() => window.localStorage.getItem('funnnny-theme') || 'light')
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    window.localStorage.setItem('funnnny-theme', theme)
+  }, [theme])
 
   const openPortfolio = () => {
     setProfileOpen(false)
@@ -739,6 +897,9 @@ function App() {
           </nav>
           <div className="nav-actions">
             <button type="button" className="nav-portfolio-mobile" onClick={openPortfolio} aria-haspopup="dialog" aria-expanded={portfolioOpen} aria-controls="portfolio-dialog">作品集</button>
+            <button type="button" className="theme-toggle" onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')} aria-label={theme === 'dark' ? '切换到日间模式' : '切换到夜间模式'} title={theme === 'dark' ? '日间模式' : '夜间模式'}>
+              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
             <button type="button" className="nav-pricing" onClick={() => { setPricingOpen((open) => !open); setProfileOpen(false) }} aria-expanded={pricingOpen} aria-controls="pricing-panel"><span className="pricing-dot" aria-hidden="true" />明细 <small>PRICING</small></button>
             <button type="button" className="nav-contact" onClick={() => { setProfileOpen((open) => !open); setPricingOpen(false) }} aria-expanded={profileOpen} aria-controls="profile-panel"><span className="person-dot" />个人介绍 <small>ABOUT</small></button>
           </div>
@@ -870,7 +1031,7 @@ function App() {
         </div>
       </section>
 
-      <ContactSection />
+      <ContactSection onOpenProject={setActiveProject} />
       {portfolioOpen && <PortfolioDialog onClose={() => setPortfolioOpen(false)} />}
     </main>
   )

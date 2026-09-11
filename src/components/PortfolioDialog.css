@@ -19,6 +19,13 @@
 .portfolio-dialog-footer{display:flex;justify-content:space-between;flex-shrink:0;padding:12px 30px;border-top:1px solid rgba(40,48,48,.13);font-size:9px;letter-spacing:1px;color:#596367}
 @keyframes portfolio-appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(max-width:430px){.nav-actions .nav-portfolio-mobile{font-size:9px}}
+html[data-theme='dark'] .portfolio-dialog{color:#f2f2ee;background:rgba(24,26,26,.9);border-color:rgba(255,255,255,.16);box-shadow:0 30px 100px rgba(0,0,0,.58)}
+html[data-theme='dark'] .portfolio-dialog::before{opacity:.06;mix-blend-mode:screen}
+html[data-theme='dark'] .portfolio-dialog::backdrop{background:rgba(0,0,0,.48)}
+html[data-theme='dark'] .portfolio-dialog-header,html[data-theme='dark'] .portfolio-dialog-footer{border-color:rgba(255,255,255,.14)}
+html[data-theme='dark'] .portfolio-dialog-header>div>span,html[data-theme='dark'] .portfolio-dialog-header h2 small,html[data-theme='dark'] .portfolio-dialog-footer{color:#aaaead}
+html[data-theme='dark'] .portfolio-close{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.07);color:#f2f2ee}
+html[data-theme='dark'] .portfolio-close:hover{background:rgba(255,255,255,.16)}
 @media(prefers-reduced-motion:reduce){.portfolio-dialog[open]{animation:none}}
 .portfolio-book-frame{display:block;width:100%;height:100%;min-width:0;min-height:0;flex:1;border:0;background:transparent}
 .portfolio-book-frame[data-ready=false]{visibility:hidden;pointer-events:none}
